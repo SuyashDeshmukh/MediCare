@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="method_options">
+        <item>Scan Barcode</item>
+        <item>Add Manually</item>
+    </string-array>
+    <string-array name="frequency_options">
+        <item>Once a day</item>
+        <item>Twice a day</item>
+        <item>3 times a day</item>
+        <item>4 times a day</item>
+        <item>5 times a day</item>
+        <item>6 times a day</item>
+        <item>7 times a day</item>
+        <item>8 times a day</item>
+        <item>9 times a day</item>
+        <item>10 times a day</item>
+        <item>11 times a day</item>
+        <item>12 times a day</item>
+        <item>Every 12 hours</item>
+        <item>Every 8 hours</item>
+        <item>Every 6 hours</item>
+        <item>Every 4 hours</item>
+        <item>Every 2 hours</item>
+        <item>Every hour</item>
+    </string-array>
+    <string-array name="dosage_options">
+        <item>mg</item>
+        <item>ml</item>
+        <item>gram</item>
+        <item>pills</item>
+        <item>teaspoon</item>
+        <item>tablespoon</item>
+    </string-array>
+    <string-array name="repeat_unit_options">
+        <item>min</item>
+        <item>hour</item>
+    </string-array>
+
+</resources>
