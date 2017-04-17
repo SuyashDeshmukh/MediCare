@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.csulb.android.medicare.AddMedicationWithBarcodeActivity">
+    tools:context="edu.csulb.android.medicare.Activity.AddMedicationWithBarcodeActivity">
 
     <Button
         android:id="@+id/buttonScan"

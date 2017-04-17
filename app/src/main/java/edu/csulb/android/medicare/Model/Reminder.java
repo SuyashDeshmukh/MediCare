@@ -4,9 +4,6 @@ package edu.csulb.android.medicare.Model;
  * Created by Samruddhi on 4/3/2017.
  */
 
-/*
-    Reminder Model class to store reminder details for particular medicine.
- */
 public class Reminder {
     private String repeatTime;
     private String daysOfWeek;

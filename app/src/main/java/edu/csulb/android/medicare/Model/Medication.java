@@ -4,11 +4,6 @@ package edu.csulb.android.medicare.Model;
  * Created by Samruddhi on 4/2/2017.
  */
 
-/*
-    Medication Model class to store all the medicine related details
-    Unique id, Name, dosage unit, dosage quantity, instructions, key reminder.
- */
-
 public class Medication {
     private Long id;
     private String medicationName;

@@ -11,6 +11,8 @@ import android.net.Uri;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 
+import edu.csulb.android.medicare.Activity.NavigationDrawerActivity;
+
 /**
  * Created by Suyash on 06-Apr-17.
  */

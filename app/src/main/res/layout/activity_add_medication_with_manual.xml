@@ -11,7 +11,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="edu.csulb.android.medicare.AddMedicationWithManualActivity">
+    tools:context="edu.csulb.android.medicare.Activity.AddMedicationWithManualActivity">
 <android.support.v7.widget.CardView
     xmlns:card_view="http://schemas.Android.com/apk/res-auto"
     android:layout_gravity="center"
@@ -28,10 +28,11 @@
         android:id="@+id/textMedicine"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#000"
+        android:background="@color/card_title"
+        android:textColor="@color/card_bg"
         android:padding="2dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
         android:text="Medicine Name"
         android:textSize="20sp"/>
 
@@ -64,10 +65,11 @@
             android:id="@+id/textReminderTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#000"
+            android:background="@color/card_title"
+            android:textColor="@color/card_bg"
             android:padding="2dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
             android:text="Reminder Time"
             android:textSize="20sp"/>
         <LinearLayout
@@ -178,10 +180,11 @@
         android:id="@+id/textSchedule"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#000"
+        android:background="@color/card_title"
+        android:textColor="@color/card_bg"
         android:padding="2dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
         android:text="Schedule"
         android:textSize="20sp"/>
     <TextView
@@ -260,10 +263,11 @@
         android:id="@+id/textDosage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#000"
+        android:background="@color/card_title"
+        android:textColor="@color/card_bg"
         android:padding="2dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
         android:text="Dosage"
         android:textSize="20sp"/>
     <LinearLayout
@@ -307,10 +311,11 @@
         android:id="@+id/textInstructions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#000"
+        android:background="@color/card_title"
+        android:textColor="@color/card_bg"
         android:padding="2dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
         android:text="Instructions"
         android:textSize="20sp"/>
     <TextView
@@ -360,8 +365,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:padding="8dp"
-        android:background="@color/colorPrimary"
-        android:textColor="#fff"
+        android:background="@color/card_title"
+        android:textColor="@color/card_bg"
         android:text="Add Medication"
         android:layout_gravity="right"
         android:id="@+id/buttonSaveMedication"/>

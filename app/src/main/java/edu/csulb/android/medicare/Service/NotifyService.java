@@ -11,8 +11,8 @@ import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import edu.csulb.android.medicare.AddMedicationWithManualActivity;
-import edu.csulb.android.medicare.NavigationDrawerActivity;
+import edu.csulb.android.medicare.Activity.AddMedicationWithManualActivity;
+import edu.csulb.android.medicare.Activity.NavigationDrawerActivity;
 import edu.csulb.android.medicare.R;
 
 /**

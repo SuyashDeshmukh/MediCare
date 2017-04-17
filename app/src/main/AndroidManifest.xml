@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.csulb.android.medicare">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,38 +13,45 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
-            android:name=".GoogleSignInActivity"
+            android:name=".Activity.GoogleSignInActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
+
+            <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            -->
         </activity>
-
         <activity
-            android:name=".NavigationDrawerActivity"
+            android:name=".Activity.NavigationDrawerActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
-            >
-            <!-- <intent-filter>
-                 <action android:name="android.intent.action.MAIN" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-                 <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter> -->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-
-        <activity android:name=".AddMedicationWithBarcodeActivity" />
+        <activity android:name=".Activity.AddMedicationWithBarcodeActivity" />
         <activity
-            android:name=".AddMedicationWithManualActivity"
+            android:name=".Activity.AddMedicationWithManualActivity"
             android:label="Add Medication"
-            android:parentActivityName=".NavigationDrawerActivity" />
-        <activity android:name=".ViewMedicationActivity"></activity>
+            android:parentActivityName=".Activity.NavigationDrawerActivity" />
+        <activity android:name=".Activity.ViewMedicationActivity" />
 
-        <receiver  android:process=":remote" android:name=".AlarmReceiver"></receiver>
+        <receiver
+            android:name=".AlarmReceiver"
+            android:process=":remote" />
+
+        <activity
+            android:name=".Activity.SettingsActivity"
+            android:label="@string/title_activity_settings" />
+        <activity android:name=".Activity.ViewAlarmActivity" />
+        <activity android:name=".Activity.PharmaciesListActivity"></activity>
     </application>
 
 </manifest>

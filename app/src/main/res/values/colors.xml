@@ -5,5 +5,8 @@
     <color name="colorAccent">#FF4081</color>
     <color name="grey_100">#F5F5F5</color>
     <color name="grey_300">#E0E0E0</color>
+    <color name="card_bg">#fff</color>
+    <color name="card_title">#81C784</color>
+    <color name="card_desc">#ddd</color>
 
 </resources>

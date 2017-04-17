@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="edu.csulb.android.medicare.ViewMedicationActivity">
+    tools:context="edu.csulb.android.medicare.Activity.ViewMedicationActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -15,7 +15,7 @@
                 android:id="@+id/textMedicine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/card_title"
                 android:padding="2dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
@@ -32,7 +32,7 @@
                 android:id="@+id/textReminderTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
+                android:background="@color/card_title"
                 android:textColor="#fff"
                 android:padding="2dp"
                 android:layout_marginTop="8dp"
@@ -123,7 +123,7 @@
                 android:id="@+id/textSchedule"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
+                android:background="@color/card_title"
                 android:textColor="#fff"
                 android:padding="2dp"
                 android:layout_marginTop="8dp"
@@ -134,16 +134,19 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:weightSum="1"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:text="Duration"
                 android:textSize="16sp"/>
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
@@ -160,16 +163,19 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:weightSum="1"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:text="Days"
                 android:textSize="16sp"/>
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
@@ -188,7 +194,7 @@
                 android:id="@+id/textDosage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
+                android:background="@color/card_title"
                 android:textColor="#fff"
                 android:padding="2dp"
                 android:layout_marginTop="8dp"
@@ -229,7 +235,7 @@
                 android:id="@+id/textInstructions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
+                android:background="@color/card_title"
                 android:textColor="#fff"
                 android:padding="2dp"
                 android:layout_marginTop="8dp"

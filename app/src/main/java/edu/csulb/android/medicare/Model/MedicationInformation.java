@@ -4,10 +4,6 @@ package edu.csulb.android.medicare.Model;
  * Created by Samruddhi on 4/4/2017.
  */
 
-/*
-    Medication Information Model for storing all the medicine and reminder information.
-
- */
 public class MedicationInformation {
     private Long id;
     private String medicationName;

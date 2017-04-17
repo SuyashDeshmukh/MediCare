@@ -82,10 +82,6 @@ public class MedicationDatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    /*
-        Adds reminder to the database and returns unique reminder id.
-        Values : repeatTime, DaysofWeek, NumberofDays, Hour, Minute, StartDate
-     */
     public long insertReminder(Reminder reminder){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -102,10 +98,6 @@ public class MedicationDatabaseHelper extends SQLiteOpenHelper {
         return reminder_id;
     }
 
-    /*
-        Adds Medicine details to the database.
-        Values : MedicationName, DosageUnit, DosageQuantity, Instructions, KeyReminder
-     */
     public long insertMedication(Medication medication){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -120,10 +112,6 @@ public class MedicationDatabaseHelper extends SQLiteOpenHelper {
         // Closing database connection
         return medication_id;
     }
-
-    /*
-        Retrieves all the medication information from medicine table.
-     */
 
     public List<Medication> getAllMedications(){
         List<Medication> medications = new ArrayList<Medication>();
@@ -145,10 +133,6 @@ public class MedicationDatabaseHelper extends SQLiteOpenHelper {
         return medications;
     }
 
-    /*
-        Retrieves all medication information by performing join operation
-        between Medicine and Reminder table.
-     */
 
     public List<MedicationInformation> getAllMedicationInformationList(){
         List<MedicationInformation> medicationInformations = new ArrayList<MedicationInformation>();
@@ -183,10 +167,6 @@ public class MedicationDatabaseHelper extends SQLiteOpenHelper {
         return medicationInformations;
     }
 
-    /*
-        Retrieves medication information from medicine id by
-        join operation between medicine and reminder table.
-     */
     public MedicationInformation getMedicationInformationFromID(long medication_id){
         MedicationInformation medicationInformation = new MedicationInformation();
         String MY_QUERY = "SELECT * FROM "
@@ -220,9 +200,6 @@ public class MedicationDatabaseHelper extends SQLiteOpenHelper {
         return medicationInformation;
     }
 
-    /*
-        Fetches particular medicine by providing medicine id.
-     */
     public Medication getMedicationFromID(Long id){
         Medication medication;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -254,9 +231,6 @@ public class MedicationDatabaseHelper extends SQLiteOpenHelper {
         return medication;
     }
 
-    /*
-        Fetches reminder details for a particular medication with the help of reminder id.
-     */
     public Reminder getReminderForMedication(long reminder_id){
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -289,10 +263,6 @@ public class MedicationDatabaseHelper extends SQLiteOpenHelper {
         return reminder;
     }
 
-       /*
-        Gets reminder id form the medication table by providing medication id.
-         */
-
     public Long getReminderIDFromMedicationID(Long id){
         Medication medication;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -319,9 +289,6 @@ public class MedicationDatabaseHelper extends SQLiteOpenHelper {
         return reminderID;
     }
 
-    /*
-        Deletes particular medicine details from medicine and reminder tables.
-     */
     public void deleteMedication(Long medicationID){
         SQLiteDatabase db = this.getWritableDatabase();
         // Deleting Row
