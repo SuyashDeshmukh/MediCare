@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="120dp"
     android:id="@+id/card_view"
     android:layout_margin="5dp"
     card_view:cardBackgroundColor="@color/card_bg"
@@ -24,6 +24,7 @@
                 android:background="@color/card_title"
                 android:textColor="@color/card_bg"
                 android:padding="2dp"
+                android:singleLine="true"
                 android:layout_marginLeft="0dp"
                 android:layout_marginRight="0dp"
                 android:text=""
@@ -34,17 +35,14 @@
                 android:padding="2dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:id="@+id/layoutScheduledFor"
-                android:weightSum="1">
+                android:id="@+id/layoutScheduledFor">
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="0.6"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Scheduled for "
+                    android:text="Scheduled at "
                     android:textSize="16sp"/>
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="0.4"
+                    android:layout_width="wrap_content"
                     android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
                     android:id="@+id/scheduleTime"
@@ -67,6 +65,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
                     android:id="@+id/takeDosage"
                     android:text=""
                     android:textSize="16sp"/>
@@ -82,16 +81,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Last taken on "
+                    android:text="Instructions "
                     android:textSize="16sp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textLastTakenOn"
+                    android:id="@+id/textInstructionsA"
                     android:text=""
                     android:textSize="16sp"/>
             </LinearLayout>
-            <View
+            <!--<View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:padding="2dp"
@@ -115,7 +114,7 @@
                     android:text="TAKE"
                     android:textColor="@color/card_title"
                     android:background="@color/card_bg"/>
-            </RelativeLayout>
+            </RelativeLayout>-->
         </LinearLayout>
 
 

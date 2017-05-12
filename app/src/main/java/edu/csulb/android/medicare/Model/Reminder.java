@@ -1,52 +1,39 @@
 package edu.csulb.android.medicare.Model;
 
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Created by Samruddhi on 4/3/2017.
  */
 
-public class Reminder {
-    private String repeatTime;
-    private String daysOfWeek;
-    private int numberOfDays;
+public class Reminder implements Comparable<Reminder>{
+    private long id;
+    private String medicineName;
     private int hour;
     private int minute;
-    private String startDate;
+    private boolean daysOfWeek[] = new boolean[7];
+    private String dosageUnit;
+    private String dosageQuantity;
+    private String instructions;
+    private String repeatTime;
+    private List<Long> medicineIds = new LinkedList<Long>();
 
-    public Reminder(){
-
+    public long getId() {
+        return id;
     }
 
-    public Reminder(String repeatTime, String daysOfWeek, int numberOfDays, int hour, int minute, String startDate) {
-        this.repeatTime = repeatTime;
-        this.daysOfWeek = daysOfWeek;
-        this.numberOfDays = numberOfDays;
-        this.hour = hour;
-        this.minute = minute;
-        this.startDate = startDate;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public String getRepeatTime() {
-        return repeatTime;
+    public String getMedicineName() {
+        return medicineName;
     }
 
-    public void setRepeatTime(String repeatTime) {
-        this.repeatTime = repeatTime;
-    }
-
-    public String getDaysOfWeek() {
-        return daysOfWeek;
-    }
-
-    public void setDaysOfWeek(String daysOfWeek) {
-        this.daysOfWeek = daysOfWeek;
-    }
-
-    public int getNumberOfDays() {
-        return numberOfDays;
-    }
-
-    public void setNumberOfDays(int numberOfDays) {
-        this.numberOfDays = numberOfDays;
+    public void setMedicineName(String medicineName) {
+        this.medicineName = medicineName;
     }
 
     public int getHour() {
@@ -65,12 +52,91 @@ public class Reminder {
         this.minute = minute;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public boolean[] getDaysOfWeek() {
+        return daysOfWeek;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
+    public void setDaysOfWeek(boolean[] daysOfWeek) {
+        this.daysOfWeek = daysOfWeek;
+    }
+
+    public String getDosageUnit() {
+        return dosageUnit;
+    }
+
+    public void setDosageUnit(String dosageUnit) {
+        this.dosageUnit = dosageUnit;
+    }
+
+    public String getDosageQuantity() {
+        return dosageQuantity;
+    }
+
+    public void setDosageQuantity(String dosageQuantity) {
+        this.dosageQuantity = dosageQuantity;
+    }
+
+    public String getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
+    }
+
+    public String getRepeatTime() {
+        return repeatTime;
+    }
+
+    public void setRepeatTime(String repeatTime) {
+        this.repeatTime = repeatTime;
+    }
+
+    public List<Long> getMedicineIds() {
+        return Collections.unmodifiableList(medicineIds);
+    }
+
+    public void addMedicineIds(long id) { medicineIds.add(id); }
+
+    public String getAmPm() { return (hour < 12) ? "am" : "pm"; }
+
+    public Reminder(){
+
+    }
+
+    /**
+     * A helper method which returns the time of the alarm in string form
+     *  hour:minutes am/pm
+     */
+    public String getStringTime() {
+        int nonMilitaryHour = hour % 12;
+        if (nonMilitaryHour == 0)
+            nonMilitaryHour = 12;
+        String min = Integer.toString(minute);
+        if (minute < 10)
+            min = "0" + minute;
+        String time = nonMilitaryHour + ":" + min + " " + getAmPm();
+        return time;
+    }
+
+    /**
+     * Overrides the compareTo() method so that alarms can be sorted by time of day from earliest to
+     * latest.
+     */
+    @Override
+    public int compareTo(Reminder reminder) {
+        if (hour < reminder.getHour())
+            return -1;
+        else if (hour > reminder.getHour())
+            return 1;
+        else {
+            if (minute < reminder.getMinute())
+                return -1;
+            else if (minute > reminder.getMinute())
+                return 1;
+            else
+                return 0;
+        }
     }
 
 }

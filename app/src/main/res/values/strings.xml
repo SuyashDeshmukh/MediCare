@@ -95,4 +95,14 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="cancel_scanning">You have cancelled the scanning</string>
+    <string name="Sunday">Su</string>
+    <string name="Monday">Mo</string>
+    <string name="Tuesday">Tu</string>
+    <string name="Wednesday">We</string>
+    <string name="Thursday">Th</string>
+    <string name="Friday">Fr</string>
+    <string name="Saturday">Sa</string>
+    <string name="query_value">Example: toothache</string>
+    <string name="welcome_message">Welcome to MediCare!</string>
+    <string name="app_name_slogan">Advanced Healthcare Made Personal</string>
 </resources>

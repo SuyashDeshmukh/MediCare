@@ -39,7 +39,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     public void remove(int position){
         medicationInformationsList.remove(position);
-        deleteMedication(position);
+        //deleteMedication(position);
         notifyItemRemoved(position);
     }
     class ViewHolder extends RecyclerView.ViewHolder{
@@ -71,13 +71,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         }
     }
 
-    public void deleteMedication(int position) {
+    /*public void deleteMedication(int position) {
         MedicationDatabaseHelper db = new MedicationDatabaseHelper(context);
         final List<MedicationInformation> notes = db.getAllMedicationInformationList();
         long medicatioID = notes.get(position).getId();
         cancelAlarm(medicatioID, context);
         db.deleteMedication(medicatioID);
-    }
+    }*/
 
     private void cancelAlarm(long medicatioID, Context context) {
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(context.ALARM_SERVICE);

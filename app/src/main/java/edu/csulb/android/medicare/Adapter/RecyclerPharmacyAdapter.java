@@ -2,10 +2,12 @@ package edu.csulb.android.medicare.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
@@ -23,6 +25,7 @@ public class RecyclerPharmacyAdapter extends RecyclerView.Adapter<RecyclerPharma
 
     private List<Pharmacy> pharmacyList;
     Context context;
+    Intent directions;
 
     public RecyclerPharmacyAdapter(List<Pharmacy> pharmacyList, Context context) {
         this.pharmacyList = pharmacyList;
@@ -36,12 +39,14 @@ public class RecyclerPharmacyAdapter extends RecyclerView.Adapter<RecyclerPharma
         public TextView itemPharmacyName;
         public TextView itemAddress;
         public TextView itemIsOpen;
+        public Button getDirections;
 
         public ViewHolder(final View itemView) {
             super(itemView);
             itemPharmacyName = (TextView) itemView.findViewById(R.id.textPharmacyName);
             itemAddress = (TextView) itemView.findViewById(R.id.textAddress);
-            itemIsOpen = (TextView) itemView.findViewById(R.id.textIsOpen);
+            getDirections=(Button)itemView.findViewById(R.id.btnPharmacyDir);
+            //itemIsOpen = (TextView) itemView.findViewById(R.id.textIsOpen);
             /*itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -54,6 +59,13 @@ public class RecyclerPharmacyAdapter extends RecyclerView.Adapter<RecyclerPharma
 
                 }
             });*/
+
+            getDirections.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    context.startActivity(directions);
+                }
+            });
         }
     }
 
@@ -67,9 +79,11 @@ public class RecyclerPharmacyAdapter extends RecyclerView.Adapter<RecyclerPharma
 
     @Override
     public void onBindViewHolder(RecyclerPharmacyAdapter.ViewHolder viewHolder, int i) {
-        viewHolder.itemPharmacyName.setText(pharmacyList.get(i).getPharmacyName());
-        //viewHolder.itemAddress.setText(pharmacyList.get(i).getAddress());
-        viewHolder.itemIsOpen.setText("open at");
+        viewHolder.itemPharmacyName.setText(" "+pharmacyList.get(i).getPharmacyName());
+        viewHolder.itemAddress.setText("Address: "+pharmacyList.get(i).getAddress());
+        directions = new Intent(android.content.Intent.ACTION_VIEW,
+                Uri.parse("google.navigation:q="+pharmacyList.get(i).getAddress()));
+        //viewHolder.itemIsOpen.setText("open at");
     }
 
     @Override

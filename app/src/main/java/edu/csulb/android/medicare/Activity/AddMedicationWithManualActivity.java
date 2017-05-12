@@ -29,13 +29,17 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.LinkedList;
 import java.util.List;
 
 import edu.csulb.android.medicare.AlarmReceiver;
 import edu.csulb.android.medicare.Database.MedicationDatabaseHelper;
+import edu.csulb.android.medicare.Database.PillBox;
 import edu.csulb.android.medicare.Model.Medication;
 import edu.csulb.android.medicare.Model.MedicationInformation;
 import edu.csulb.android.medicare.Model.Reminder;
@@ -50,10 +54,6 @@ public class AddMedicationWithManualActivity extends AppCompatActivity {
     FragmentTransaction fragmentTransaction;
     Activity activity = this;
     private Spinner spinnerFrequency, spinnerDosage, spinnerRepeatUnit;
-    LinearLayout frequencylayout;
-    ListView listviewFrequency;
-    List<TimeQuantity> frequencies;
-    RadioGroup radioGroupDuration;
     RadioGroup radioGroupDays;
     RadioGroup radioGroupInstructions;
     TextView textDosage, textStartTime, textStartDate;
@@ -65,19 +65,23 @@ public class AddMedicationWithManualActivity extends AppCompatActivity {
     private int startHour;
     private int startMinute;
     private String startDate;
-    private String instructions;
+    private String instructions="No Food Instructions";
     private String dosageUnit;
     private String daysOfWeek = "Everyday";
     private int dosageValue=1;
     private String todayDate;
     String[] dosage_options;
     String dosage;
-    PendingIntent pendingIntent;
     private int duration_no_of_days=0;
     ArrayList<String> selectedDays;
     int year,month,day;
     String medName;
     LinearLayout dosagelayout, startTimeLayout, startDateLayout;
+    int currentHour, currentMinute;
+    private boolean dayOfWeekList[] = new boolean[7];
+    private AlarmManager alarmManager;
+    private PendingIntent pendingIntent;
+    PillBox pillBox = new PillBox();
 
 
     public String getTodayDate(){
@@ -98,25 +102,31 @@ public class AddMedicationWithManualActivity extends AppCompatActivity {
         return strMonth+"/"+strDay+"/"+year;
     }
 
-    public String getCurrentTime(){
-        String strHour="", strMin="";
-        Calendar mcurrentTime = Calendar.getInstance();
-        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-        startHour = hour;
-        int minute = mcurrentTime.get(Calendar.MINUTE);
-        startMinute = minute;
-        if(hour<10)
-            strHour = "0"+hour;
+    /**
+     * This method takes hours and minute as input and returns
+     * a string that is like "12:01pm"
+     */
+    public String setTime(int hour, int minute) {
+        String am_pm = (hour < 12) ? "am" : "pm";
+        int nonMilitaryHour = hour % 12;
+        if (nonMilitaryHour == 0)
+            nonMilitaryHour = 12;
+        String minuteWithZero;
+        if (minute < 10)
+            minuteWithZero = "0" + minute;
         else
-            strHour = ""+hour;
-        if(minute<10)
-            strMin = "0"+minute;
-        else
-            strMin=""+minute;
-        return strHour+":"+strMin;
+            minuteWithZero = "" + minute;
+        return nonMilitaryHour + ":" + minuteWithZero + am_pm;
+    }
+
+    public void getCurrentHourMinute(){
+        Calendar calendar = Calendar.getInstance();
+        currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+        currentMinute = calendar.get(Calendar.MINUTE);
     }
 
     public void initialize(){
+
         medicineName = (AutoCompleteTextView) findViewById(R.id.cardview_name_text);
         dosagelayout = (LinearLayout) findViewById(R.id.layoutDosage);
         startTimeLayout = (LinearLayout) findViewById(R.id.layoutStartTime);
@@ -124,13 +134,14 @@ public class AddMedicationWithManualActivity extends AppCompatActivity {
         textDosage = (TextView) findViewById(R.id.dosage);
         textStartTime = (TextView) findViewById(R.id.startTime);
         textStartDate = (TextView) findViewById(R.id.startDate);
-        radioGroupDuration = (RadioGroup) findViewById(R.id.radioGroupDuration);
-        repeatTime = (EditText) findViewById(R.id.edit_repeat);
-        spinnerRepeatUnit = (Spinner) findViewById(R.id.spinnerRepeatUnit);
-        radioGroupDuration = (RadioGroup) findViewById(R.id.radioGroupDuration);
+        //repeatTime = (EditText) findViewById(R.id.edit_repeat);
+        //spinnerRepeatUnit = (Spinner) findViewById(R.id.spinnerRepeatUnit);
         radioGroupDays = (RadioGroup) findViewById(R.id.radioGroupDays);
         radioGroupInstructions = (RadioGroup) findViewById(R.id.radioGroupInstructions);
         saveMedication = (Button) findViewById(R.id.buttonSaveMedication);
+        for(int i=0;i<dayOfWeekList.length;i++){
+            dayOfWeekList[i] = true;
+        }
 
     }
 
@@ -138,18 +149,16 @@ public class AddMedicationWithManualActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_medication_with_manual);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initialize();
         Intent intent=getIntent();
         medName=intent.getStringExtra("Medicine Name");
 
-        /*ArrayAdapter<String> autoCompleteAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, COUNTRIES);
-        medicineName.setAdapter(autoCompleteAdapter);*/
         if(medName!=null)
             medicineName.setText(medName);
         dosageUnit = getResources().getStringArray(R.array.dosage_options)[0];
 // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+/*        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.repeat_unit_options, android.R.layout.simple_spinner_item);
 // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -167,10 +176,10 @@ public class AddMedicationWithManualActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
 
 
-        textStartTime.setText(getCurrentTime());
+        textStartTime.setText(setTime(currentHour,currentMinute));
         startTimeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,7 +190,7 @@ public class AddMedicationWithManualActivity extends AppCompatActivity {
                 timePicker = new TimePickerDialog(AddMedicationWithManualActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        textStartTime.setText( selectedHour + ":" + selectedMinute);
+                        textStartTime.setText(setTime(selectedHour, selectedMinute));
                         startHour = selectedHour;
                         startMinute = selectedMinute;
                     }
@@ -191,13 +200,13 @@ public class AddMedicationWithManualActivity extends AppCompatActivity {
             }
         });
         textStartDate.setText(getTodayDate());
-        startDateLayout.setOnClickListener(new View.OnClickListener() {
+        /*startDateLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 displayDatePicker();
             }
-        });
-        textDosage.setText("None");
+        });*/
+        textDosage.setText(dosageValue+" "+dosageUnit);
         dosagelayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -209,13 +218,121 @@ public class AddMedicationWithManualActivity extends AppCompatActivity {
         saveMedication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveMedication();
+                saveReminderForMedication();
                 finish();
                 //save all data
             }
         });
 
 
+    }
+
+    private void saveReminderForMedication() {
+        int checkBoxCounter = 0;
+        boolean cancel = false;
+        //Medication Name
+        if(medicineName.getText().toString().trim().equals("")){
+            medicineName.setError("Medicine name is required!");
+            cancel = true;
+        }
+        /*//Medication Name
+        if(repeatTime.getText().toString().trim().equals("")){
+            repeatTime.setError("Repeat time is required!");
+            cancel = true;
+        }*/
+
+        Reminder reminder = new Reminder();
+
+        String med_name = medicineName.getText().toString();
+
+        /** If Pill does not already exist */
+        if (!pillBox.pillExist(getApplicationContext(),med_name)) {
+            Medication medication = new Medication();
+            medication.setMedicationName(med_name);
+            reminder.setHour(startHour);
+            reminder.setMinute(startMinute);
+            reminder.setMedicineName(med_name);
+            reminder.setDosageQuantity(dosageValue+"");
+            reminder.setDosageUnit(dosageUnit);
+            reminder.setInstructions(instructions);
+            reminder.setRepeatTime(reminderTimeQuntity+" "+reminderTimeUnit);
+            reminder.setDaysOfWeek(dayOfWeekList);
+            medication.addReminder(reminder);
+            long pillId = pillBox.addPill(getApplicationContext() ,medication);
+            medication.setId(pillId);
+            pillBox.addAlarm(getApplicationContext(),reminder,medication);
+        } else { // If Pill already exists
+            Medication medication = pillBox.getPillByName(getApplicationContext(), med_name);
+            reminder.setHour(startHour);
+            reminder.setMinute(startMinute);
+            reminder.setMedicineName(med_name);
+            reminder.setDosageQuantity(dosageValue+"");
+            reminder.setDosageUnit(dosageUnit);
+            reminder.setInstructions(instructions);
+            reminder.setRepeatTime(reminderTimeQuntity+" "+reminderTimeUnit);
+            reminder.setDaysOfWeek(dayOfWeekList);
+            medication.addReminder(reminder);
+            pillBox.addAlarm(getApplicationContext(),reminder,medication);
+        }
+        List<Long> ids = new LinkedList<Long>();
+        try {
+            List<Reminder> reminders = pillBox.getAlarmByPill(getApplicationContext(), med_name);
+            for(Reminder temp: reminders) {
+                if(temp.getHour() == startHour && temp.getMinute() == startMinute) {
+                    ids = temp.getMedicineIds();
+                    break;
+                }
+            }
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+        for(int i=0; i<7; i++) {
+            if (dayOfWeekList[i] && med_name.length() != 0) {
+
+                int dayOfWeek = i;
+
+                long _id = ids.get(checkBoxCounter);
+                int id = (int) _id;
+                checkBoxCounter++;
+
+                /** This intent invokes the activity AlertActivity, which in turn opens the AlertAlarm window */
+                //Intent intent = new Intent(getBaseContext(), AlertActivity.class);
+                Intent intent = new Intent(getBaseContext(), AlarmReceiver.class);
+                intent.putExtra("medicine_name", med_name);
+
+                //pendingIntent = PendingIntent.getActivity(getBaseContext(), id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                pendingIntent = PendingIntent.getBroadcast(getBaseContext(), id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                /** Getting a reference to the System Service ALARM_SERVICE */
+                alarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
+
+                /** Creating a calendar object corresponding to the date and time set by the user */
+                Calendar calendar = Calendar.getInstance();
+
+                calendar.set(Calendar.HOUR_OF_DAY, startHour);
+                calendar.set(Calendar.MINUTE, startMinute);
+                calendar.set(Calendar.SECOND, 0);
+                calendar.set(Calendar.MILLISECOND, 0);
+                calendar.set(Calendar.DAY_OF_WEEK, dayOfWeek);
+
+                /** Converting the date and time in to milliseconds elapsed since epoch */
+                long alarm_time = calendar.getTimeInMillis();
+
+                if (calendar.before(Calendar.getInstance()))
+                    alarm_time += AlarmManager.INTERVAL_DAY * 7;
+
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarm_time,
+                        alarmManager.INTERVAL_DAY * 7, pendingIntent);
+            }
+        }
+        /** Input form is not completely filled out */
+        if(!cancel) { // Input form is completely filled out
+            Toast.makeText(getBaseContext(), "Reminder for " + med_name + " is set successfully", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, NavigationDrawerActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     private void displayDosagePicker(){
@@ -298,7 +415,7 @@ public class AddMedicationWithManualActivity extends AppCompatActivity {
         datePicker.setTitle("Set Start Date");
         datePicker.show();
     }
-    public void saveMedication(){
+    /*public void saveMedication(){
         MedicationDatabaseHelper databaseHelper = new MedicationDatabaseHelper(getApplicationContext());
         boolean cancel = false;
         //Medication Name
@@ -326,9 +443,9 @@ public class AddMedicationWithManualActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-    }
+    }*/
 
-    public long addReminder(){
+    /*public long addReminder(){
         MedicationDatabaseHelper databaseHelper = new MedicationDatabaseHelper(getApplicationContext());
         Reminder reminder = new Reminder();
         reminder.setRepeatTime(reminderTimeQuntity+" "+reminderTimeUnit);
@@ -340,11 +457,15 @@ public class AddMedicationWithManualActivity extends AppCompatActivity {
         long reminder_id = databaseHelper.insertReminder(reminder);
         databaseHelper.close();
         return reminder_id;
-    }
+    }*/
 
     private void addAlarm(int hr,int min,long id) {
         String[] dividedDate = startDate.split("/");
-        int repeatAfterMins = Integer.parseInt(repeatTime.getText().toString());
+        int repeatAfterMins;
+        if(reminderTimeUnit.matches("min"))
+            repeatAfterMins = Integer.parseInt(reminderTimeQuntity);
+        else
+            repeatAfterMins = Integer.parseInt(reminderTimeQuntity)*60;
         Log.d("Message","Alarm to repeat after "+repeatAfterMins+" Mins");
 
         Intent myIntent = new Intent(this , AlarmReceiver.class);
@@ -353,7 +474,12 @@ public class AddMedicationWithManualActivity extends AppCompatActivity {
         int startYear=Integer.parseInt(dividedDate[2]);
         int startDay=Integer.parseInt(dividedDate[1]);
         int startMonth=Integer.parseInt(dividedDate[0]);
+        ///Create a calendar object corresponding to the time set by the user
         Calendar calendar = Calendar.getInstance();
+        /*calendar.set(Calendar.HOUR_OF_DAY, hr);
+        calendar.set(Calendar.MINUTE, min);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);*/
         Log.e("Details :","Year:"+startYear);
         Log.e("Details :","Month:"+startMonth);
         Log.e("Details :","Day:"+startDay);
@@ -364,7 +490,7 @@ public class AddMedicationWithManualActivity extends AppCompatActivity {
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),1000*60*repeatAfterMins,pendingIntent);
     }
 
-    public long addMedication(long reminder_id){
+    /*public long addMedication(long reminder_id){
         MedicationDatabaseHelper databaseHelper = new MedicationDatabaseHelper(getApplicationContext());
         Medication medication = new Medication();
         medication.setMedicationName(medicineName.getText().toString());
@@ -375,65 +501,24 @@ public class AddMedicationWithManualActivity extends AppCompatActivity {
         long medication_id = databaseHelper.insertMedication(medication);
         databaseHelper.close();
         return medication_id;
-    }
-
-    public void onClickDuration(View view){
-        switch(view.getId())
-        {
-            case R.id.radioContinuous:
-                RadioButton button = (RadioButton) findViewById(R.id.radioContinuous);
-                duration_no_of_days = 0;
-                break;
-            case R.id.radioDays:
-                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                // Get the layout inflater
-                LayoutInflater inflater = (activity).getLayoutInflater();
-                // Inflate and set the layout for the dialog
-                // Pass null as the parent view because its going in the
-                // dialog layout
-                builder.setTitle(R.string.number_of_days);
-                builder.setCancelable(true);
-                final View layout = inflater.inflate(R.layout.custom_dialog_days, null);
-                NumberPicker numberPicker = (NumberPicker) layout.findViewById(R.id.numberPicker);
-                loadNumberPicker(numberPicker,30);
-                numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-                    @Override
-                    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                        duration_no_of_days = newVal;
-                    }
-                });
-                builder.setView(layout)
-                        // Add action buttons
-                        .setPositiveButton("SET", new DialogInterface.OnClickListener() {
-                            //@TargetApi(23)
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-
-                                dialog.cancel();
-                            }
-                        })
-                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.dismiss();
-                            }
-                        });
-                builder.create();
-                builder.show();
-                break;
-        }
-    }
+    }*/
 
     public void onClickDays(View view){
+        final String[] daysofweek = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
         switch(view.getId())
         {
             case R.id.radioEveryDay:
                 RadioButton button = (RadioButton) findViewById(R.id.radioEveryDay);
                 days = button.getText().toString();
                 daysOfWeek = days;
+                for(int i=0;i<daysofweek.length;i++){
+                    dayOfWeekList[i] = true;
+                }
                 break;
             case R.id.radioSpecificDay:
-                final String[] daysofweek = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
+                for(int i=0;i<daysofweek.length;i++){
+                    dayOfWeekList[i] = false;
+                }
                 selectedDays = new ArrayList<String>();
                 AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
@@ -445,9 +530,14 @@ public class AddMedicationWithManualActivity extends AppCompatActivity {
                         if (isChecked) {
                             // If the user checked the item, add it to the selected items
                             selectedDays.add(daysofweek[indexSelected]);
+                            if(indexSelected+1 == 7)
+                                dayOfWeekList[0] = true;
+                            else
+                                dayOfWeekList[indexSelected+1] = true;
                         } else if (selectedDays.contains(indexSelected)) {
                             // Else, if the item is already in the array, remove it
                             selectedDays.remove(Integer.valueOf(indexSelected));
+                            dayOfWeekList[indexSelected] = false;
                         }
                     }
                 })

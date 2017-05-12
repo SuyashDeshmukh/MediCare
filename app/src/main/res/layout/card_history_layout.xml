@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:id="@+id/card_view"
+    android:layout_margin="5dp"
+    card_view:cardBackgroundColor="@color/card_bg"
+    card_view:cardCornerRadius="5dp"
+    card_view:cardElevation="3dp"
+    card_view:contentPadding="4dp"
+    android:foreground="?selectableItemBackground"
+    android:clickable="true" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/textMedicineName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/card_title"
+                android:textColor="@color/card_bg"
+                android:padding="2dp"
+                android:singleLine="true"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:text=""
+                android:textSize="20sp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:id="@+id/layoutDate"
+                android:weightSum="1">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.6"
+                    android:layout_height="wrap_content"
+                    android:text="Taken on "
+                    android:textSize="16sp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.4"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/takenOn"
+                    android:text=""
+                    android:textSize="16sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:id="@+id/layoutLastTakenOn"
+                android:weightSum="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Time "
+                    android:textSize="16sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textTime"
+                    android:text=""
+                    android:textSize="16sp"/>
+            </LinearLayout>
+            <!--<View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:padding="2dp"
+                android:layout_margin="5dp"
+                android:background="#ddd"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnSkip"
+                    android:text="SKIP"
+                    android:background="@color/card_bg"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnTake"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="0dp"
+                    android:text="TAKE"
+                    android:textColor="@color/card_title"
+                    android:background="@color/card_bg"/>
+            </RelativeLayout>-->
+        </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

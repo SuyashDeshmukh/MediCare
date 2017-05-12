@@ -8,6 +8,13 @@
     tools:context="edu.csulb.android.medicare.Activity.NavigationDrawerActivity"
     tools:showIn="@layout/app_bar_navigation_drawer">
 
+    <FrameLayout
+        android:id="@+id/content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
     <!--TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

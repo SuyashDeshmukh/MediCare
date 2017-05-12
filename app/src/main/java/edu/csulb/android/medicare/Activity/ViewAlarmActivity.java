@@ -26,7 +26,7 @@ public class ViewAlarmActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerAlarmAdapter = new RecyclerAlarmAdapter(medicationInformations,getApplicationContext());
-        recyclerView.setAdapter(recyclerAlarmAdapter);
+        //recyclerAlarmAdapter = new RecyclerAlarmAdapter(medicationInformations,getApplicationContext());
+        //recyclerView.setAdapter(recyclerAlarmAdapter);
     }
 }

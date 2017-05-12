@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import edu.csulb.android.medicare.Model.MedicationInformation;
+import edu.csulb.android.medicare.Model.Reminder;
 import edu.csulb.android.medicare.R;
 import edu.csulb.android.medicare.Activity.ViewMedicationActivity;
 
@@ -20,11 +21,11 @@ import edu.csulb.android.medicare.Activity.ViewMedicationActivity;
 
 public class RecyclerAlarmAdapter extends RecyclerView.Adapter<RecyclerAlarmAdapter.ViewHolder>  {
 
-    private List<MedicationInformation> medicationInformationsList;
+    private List<Reminder> reminders;
     Context context;
 
-    public RecyclerAlarmAdapter(List<MedicationInformation> medicationInformationsList, Context context){
-        this.medicationInformationsList = medicationInformationsList;
+    public RecyclerAlarmAdapter(List<Reminder> reminders, Context context){
+        this.reminders = reminders;
         this.context = context;
     }
 
@@ -34,27 +35,27 @@ public class RecyclerAlarmAdapter extends RecyclerView.Adapter<RecyclerAlarmAdap
         String medicineName;
         public TextView itemMedicineName;
         public TextView itemScheduleTime;
-        public TextView itemLastTaken;
+        public TextView itemInstructionsA;
         public TextView itemTakeDosage;
 
         public ViewHolder(final View itemView) {
             super(itemView);
             itemMedicineName = (TextView)itemView.findViewById(R.id.textMedicineName);
             itemScheduleTime = (TextView)itemView.findViewById(R.id.scheduleTime);
-            itemLastTaken = (TextView)itemView.findViewById(R.id.rowRepeatTime);
             itemTakeDosage = (TextView)itemView.findViewById(R.id.takeDosage);
-            itemView.setOnClickListener(new View.OnClickListener() {
+            itemInstructionsA = (TextView)itemView.findViewById(R.id.textInstructionsA);
+            /*itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
                     int position = getAdapterPosition();
 
-                    MedicationInformation medicationInformation = medicationInformationsList.get(position);
+                    Reminder reminder = reminders.get(position);
                     Context context = itemView.getContext();
                     Intent intent = new Intent(context, ViewMedicationActivity.class);
-                    intent.putExtra("medication_id",medicationInformation.getId());
+                    intent.putExtra("reminder_id",reminder.getId());
                     context.startActivity(intent);
 
                 }
-            });
+            });*/
         }
     }
 
@@ -68,18 +69,16 @@ public class RecyclerAlarmAdapter extends RecyclerView.Adapter<RecyclerAlarmAdap
 
     @Override
     public void onBindViewHolder(RecyclerAlarmAdapter.ViewHolder viewHolder, int i) {
-        viewHolder.itemMedicineName.setText(medicationInformationsList.get(i).getMedicationName());
-        viewHolder.itemScheduleTime.setText(medicationInformationsList.get(i).getDosageQuantity()
+        viewHolder.itemMedicineName.setText(reminders.get(i).getMedicineName());
+        viewHolder.itemScheduleTime.setText(reminders.get(i).getStringTime());
+        viewHolder.itemInstructionsA.setText(reminders.get(i).getInstructions());
+        viewHolder.itemTakeDosage.setText(reminders.get(i).getDosageQuantity()
                 +" "+
-                medicationInformationsList.get(i).getDosageUnit());
-        viewHolder.itemLastTaken.setText(medicationInformationsList.get(i).getRepeatTime());
-        viewHolder.itemTakeDosage.setText(medicationInformationsList.get(i).getDosageQuantity()
-                +" "+
-                medicationInformationsList.get(i).getDosageUnit());
+                reminders.get(i).getDosageUnit());
     }
 
     @Override
     public int getItemCount() {
-        return medicationInformationsList.size();
+        return reminders.size();
     }
 }

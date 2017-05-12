@@ -40,9 +40,9 @@ public class ViewMedicationActivity extends AppCompatActivity {
     }
 
     public void viewMedication(long medication_id){
-        MedicationDatabaseHelper db = new MedicationDatabaseHelper(getApplicationContext());
-        /*Medication medication = db.getMedicationFromID(medication_id);
-        Reminder reminder = db.getReminderForMedication(medication.getKeyReminder());*/
+        /*MedicationDatabaseHelper db = new MedicationDatabaseHelper(getApplicationContext());
+        *//*Medication medication = db.getMedicationFromID(medication_id);
+        Reminder reminder = db.getReminderForMedication(medication.getKeyReminder());*//*
         MedicationInformation medicationInformation = db.getMedicationInformationFromID(medication_id);
         txtMedicineName.setText(medicationInformation.getMedicationName());
         int hour = medicationInformation.getHour();
@@ -70,6 +70,6 @@ public class ViewMedicationActivity extends AppCompatActivity {
         txtNumberOfDays.setText(duration);
         txtDaysOfWeek.setText(medicationInformation.getDaysOfWeek());
         txtDosage.setText(medicationInformation.getDosageQuantity()+" "+medicationInformation.getDosageUnit());
-        txtInstructions.setText(medicationInformation.getInstructions());
+        txtInstructions.setText(medicationInformation.getInstructions());*/
     }
 }

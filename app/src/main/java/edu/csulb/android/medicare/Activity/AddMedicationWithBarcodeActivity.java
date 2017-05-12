@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -73,12 +74,21 @@ public class AddMedicationWithBarcodeActivity extends AppCompatActivity {
         progressBar = new ProgressBar(getApplicationContext());
         btnNext= (Button)findViewById(R.id.btnNext);
         btnNext.setEnabled(false);
+        btnNext.setBackgroundColor(Color.GRAY);
+        btnNext.setTextColor(Color.BLACK);
         buttonNDC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 code=NDCvalue.getText().toString();
-                task = new Task();
-                task.execute("Values");
+                if(code.length()<10)
+                {
+                    Toast.makeText(AddMedicationWithBarcodeActivity.this, "Please Enter a valid Drug Code!", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    task = new Task();
+                    task.execute("Values");
+                }
+
             }
         });
 
@@ -114,7 +124,7 @@ public class AddMedicationWithBarcodeActivity extends AppCompatActivity {
                 if(result.getContents() == null){
                     Toast.makeText(this, R.string.cancel_scanning, Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(this, result.getContents(), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(this, result.getContents(), Toast.LENGTH_SHORT).show();
                     code1=result.getContents();
                     code=code1.subSequence(1,code1.length()-1).toString();
                     Log.e("Code",code);
@@ -228,8 +238,15 @@ public class AddMedicationWithBarcodeActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean success) {
-            if(!product.getText().toString().matches("No Product Found"))
+            //if(!product.getText().toString().matches("Product Name will be displayed here")) {
                 btnNext.setEnabled(true);
+                btnNext.setBackgroundColor(getColor(R.color.card_title));
+                btnNext.setTextColor(getColor(R.color.card_bg));
+            //}
+            //else
+            //{
+              //  Toast.makeText(AddMedicationWithBarcodeActivity.this, "Barcode not recognized!\nPlease enter NDC value or add medicine manually.", Toast.LENGTH_SHORT).show();
+            //}
         }
 
         @Override
@@ -253,7 +270,7 @@ public class AddMedicationWithBarcodeActivity extends AppCompatActivity {
                     JSONObject response1 = (JSONObject)response;
                     JSONArray item1 = response1.getJSONArray("data");
                     if(item1.length()==0) {
-                        Log.e("error","no match for this NDC");
+                        Log.e("error","No match for this NDC");
                     }
                     else
                     {
@@ -275,7 +292,7 @@ public class AddMedicationWithBarcodeActivity extends AppCompatActivity {
                     JSONArray response1 = (JSONArray) response;
                     if(response1.length()==0)
                     {
-                        Log.e("error","no match for this NDC");
+                        Log.e("error","No match for this NDC");
                     }else {
                         item = response1.getJSONObject(0).getString("Name");
                         product.setText(item);

@@ -1,8 +1,10 @@
 package edu.csulb.android.medicare.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -25,6 +27,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import edu.csulb.android.medicare.R;
+import edu.csulb.android.medicare.Utility.SharedValues;
 
 /**
  * Demonstrate Firebase Authentication using a Google ID Token.
@@ -57,10 +60,13 @@ public class GoogleSignInActivity extends BaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        SharedValues.init(getApplicationContext());
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         // Views
         mStatusTextView = (TextView) findViewById(R.id.status);
         mDetailTextView = (TextView) findViewById(R.id.detail);
+        mStatusTextView.setVisibility(View.INVISIBLE);
 
         // Button listeners
         findViewById(R.id.sign_in_button).setOnClickListener(this);
@@ -93,6 +99,11 @@ public class GoogleSignInActivity extends BaseActivity implements
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     Intent myIntent = new Intent(GoogleSignInActivity.this, NavigationDrawerActivity.class);
+                    SharedValues.save("Email",user.getEmail());
+                    SharedValues.save("Name",user.getDisplayName());
+                    //myIntent.putExtra("Email",user.getEmail());
+                    //myIntent.putExtra("Name",user.getDisplayName());
+                    //myIntent.putExtra("Image",user.getPhotoUrl());
                     startActivity(myIntent);
                     finish();
                 } else {

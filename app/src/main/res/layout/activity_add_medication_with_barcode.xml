@@ -12,13 +12,16 @@
         android:layout_height="wrap_content"
         android:text="Scan Barcode"
         android:layout_marginTop="100dp"
+        android:padding="5dp"
+        android:background="@color/card_title"
+        android:textColor="@color/card_bg"
         android:layout_below="@+id/productName"
          android:layout_centerHorizontal="true"/>
     <TextView
         android:id="@+id/productName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Product Name"
+        android:text="Product Name will be displayed here"
         android:textSize="15sp"
         android:layout_marginTop="66dp"
         android:layout_alignParentTop="true"
@@ -29,6 +32,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Enter NDC"
+        android:background="@color/card_title"
+        android:textColor="@color/card_bg"
         android:layout_marginBottom="45dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
@@ -47,6 +52,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Next"
+        android:background="@color/card_title"
+        android:textColor="@color/card_bg"
         android:layout_below="@+id/buttonScan"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="28dp" />

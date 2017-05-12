@@ -1,5 +1,9 @@
 package edu.csulb.android.medicare.Model;
 
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Created by Samruddhi on 4/2/2017.
  */
@@ -7,22 +11,15 @@ package edu.csulb.android.medicare.Model;
 public class Medication {
     private Long id;
     private String medicationName;
-    private String dosageUnit;
-    private String dosageQuantity;
-    private String instructions;
-    private long keyReminder;
+    private List<Reminder> reminders = new LinkedList<Reminder>();
 
     public Medication(){
 
     }
 
-    public Medication(Long id, String medicationName, String dosageUnit, String dosageQuantity, String instructions, long keyReminder) {
+    public Medication(Long id, String medicationName) {
         this.id = id;
         this.medicationName = medicationName;
-        this.dosageUnit = dosageUnit;
-        this.dosageQuantity = dosageQuantity;
-        this.instructions = instructions;
-        this.keyReminder = keyReminder;
     }
 
     public Long getId() {
@@ -40,36 +37,9 @@ public class Medication {
         this.medicationName = medicationName;
     }
 
-    public String getDosageUnit() {
-        return dosageUnit;
-    }
-
-    public void setDosageUnit(String dosageUnit) {
-        this.dosageUnit = dosageUnit;
-    }
-
-    public String getDosageQuantity() {
-        return dosageQuantity;
-    }
-
-    public void setDosageQuantity(String dosageQuantity) {
-        this.dosageQuantity = dosageQuantity;
-    }
-
-    public String getInstructions() {
-        return instructions;
-    }
-
-    public void setInstructions(String instructions) {
-        this.instructions = instructions;
-    }
-
-    public long getKeyReminder() {
-        return keyReminder;
-    }
-
-    public void setKeyReminder(long keyReminder) {
-        this.keyReminder = keyReminder;
+    public void addReminder(Reminder reminder) {
+        reminders.add(reminder);
+        Collections.sort(reminders);
     }
 
 }

@@ -2,6 +2,8 @@ package edu.csulb.android.medicare.Activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,16 +21,30 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import edu.csulb.android.medicare.Adapter.RecyclerAdapter;
 import edu.csulb.android.medicare.Fragment.AlertDialogAddMedicationFragment;
 import edu.csulb.android.medicare.Database.MedicationDatabaseHelper;
+import edu.csulb.android.medicare.Fragment.ContactListFragment;
+import edu.csulb.android.medicare.Fragment.FindDoctorFragment;
+import edu.csulb.android.medicare.Fragment.PharmaciesListFragment;
+import edu.csulb.android.medicare.Fragment.RemindersFragment;
+import edu.csulb.android.medicare.Fragment.ViewAllMedicationsFragment;
 import edu.csulb.android.medicare.Helper.MedicineTouchHelper;
 import edu.csulb.android.medicare.Model.Medication;
 import edu.csulb.android.medicare.Model.MedicationInformation;
+import edu.csulb.android.medicare.Model.Reminder;
 import edu.csulb.android.medicare.R;
+import edu.csulb.android.medicare.Utility.MedicineCompare;
+import edu.csulb.android.medicare.Utility.SharedValues;
+
+import android.support.v4.app.FragmentManager;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class NavigationDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -37,17 +53,37 @@ public class NavigationDrawerActivity extends AppCompatActivity
     List<MedicationInformation> medicationInformations = new ArrayList<>();
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
+    private TextView userEmail;
+    private TextView userName;
+    private ImageView imgview;
     //private RecyclerView.Adapter adapter;
     private RecyclerAdapter recyclerAdapter;
+    private FloatingActionButton fab;
+    private FragmentManager fragmentManager = getSupportFragmentManager();
+    private Toolbar toolbar;
     Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawer);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        String email = SharedValues.getValue("Email");
+        String name = SharedValues.getValue("Name");
+        //String email = getIntent().getStringExtra("Email");
+        //String name = getIntent().getStringExtra("Name");
+        //Uri image = Uri.parse(getIntent().getStringExtra("Image"));
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View hView =  navigationView.getHeaderView(0);
+        userEmail= (TextView)hView.findViewById(R.id.userEmail);
+        userName= (TextView)hView.findViewById(R.id.userName);
+        imgview=(ImageView)hView.findViewById(R.id.imageView);
+        //imgview.
+        userEmail.setText(email);
+        userName.setText(name);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         context = getApplicationContext();
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,17 +91,22 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 openDialogAddMedicine();
             }
         });
-
+        fragmentManager.beginTransaction().replace(R.id.content_frame, new RemindersFragment()).commit();
+        toolbar.setTitle("Reminders");
+        fab.show();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //listViewMedication = (ListView) findViewById(R.id.listViewMedication);
-        loadMedicationsList();
+        try {
+            loadMedicationsList();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         //registerForContextMenu(listViewMedication);
         recyclerView =
                 (RecyclerView) findViewById(R.id.recycler_view);
@@ -106,8 +147,12 @@ public class NavigationDrawerActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        /*if (id == R.id.action_settings) {
             Intent intent =  new Intent(this,SettingsActivity.class);
+            startActivity(intent);
+            return true;
+        } else */if (id == R.id.action_weeklyview) {
+            Intent intent =  new Intent(this,WeeklyViewActivity.class);
             startActivity(intent);
             return true;
         }
@@ -121,20 +166,45 @@ public class NavigationDrawerActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+            // Handle the Reminders action
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new RemindersFragment()).commit();
+            toolbar.setTitle("Reminders");
+            fab.show();
+            /*Intent i = new Intent(this, ReminderActivity.class);
+            startActivity(i);*/
         } else if (id == R.id.nav_gallery) {
-
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new ViewAllMedicationsFragment()).commit();
+            toolbar.setTitle("Medications");
+            fab.hide();
+            /*Intent i = new Intent(this, NavigationDrawerActivity.class);
+            startActivity(i);*/
         } else if (id == R.id.nav_slideshow) {
-            Intent i = new Intent(this, PharmaciesListActivity.class);
-            startActivity(i);
-
-        } else if (id == R.id.nav_manage) {
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new PharmaciesListFragment()).commit();
+            toolbar.setTitle("Nearby Pharmacies");
+            fab.hide();
+            /*Intent i = new Intent(this, PharmaciesListActivity.class);
+            startActivity(i);*/
 
         } else if (id == R.id.nav_share) {
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new FindDoctorFragment()).commit();
+            toolbar.setTitle("Find Doctor");
+            fab.hide();
 
         } else if (id == R.id.nav_send) {
-
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new ContactListFragment()).commit();
+            toolbar.setTitle("Emergency Contacts");
+            fab.show();
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(getApplicationContext(), EmergencyContactActivity.class);
+                    startActivity(i);
+                }
+            });
+            /*Intent i = new Intent(this, EmergencyContactActivity.class);
+            startActivity(i);*/
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -165,9 +235,26 @@ public class NavigationDrawerActivity extends AppCompatActivity
         });
     }*/
 
-    public void loadMedicationsList(){
+    public void loadMedicationsList() throws URISyntaxException {
         MedicationDatabaseHelper db = new MedicationDatabaseHelper(getApplicationContext());
-        medicationInformations = db.getAllMedicationInformationList();
+        MedicationInformation medicationInformation = new MedicationInformation();
+        List<Medication> medications = db.getAllMedicines();
+        Collections.sort(medications, new MedicineCompare());
+
+        for (Medication medication: medications){
+            String name = medication.getMedicationName();
+            medicationInformation.setMedicationName(name);
+            List<String> times = new ArrayList<String>();
+            List<Reminder> reminders = db.getAllRemindersByMedication(name);
+            List<List<Long>> ids = new ArrayList<List<Long>>();
+
+            for (Reminder reminder :reminders){
+                String time = reminder.getStringTime();// + daysList(reminder);
+                times.add(time);
+                ids.add(reminder.getMedicineIds());
+            }
+
+        }
     }
 
     @Override

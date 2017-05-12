@@ -12,7 +12,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import edu.csulb.android.medicare.Activity.AddMedicationWithManualActivity;
-import edu.csulb.android.medicare.Activity.NavigationDrawerActivity;
+import edu.csulb.android.medicare.Fragment.RemindersFragment;
 import edu.csulb.android.medicare.R;
 
 /**
@@ -79,7 +79,7 @@ public class NotifyService extends Service {
 //        Notification notification = new Notification(icon, text, time);
 
         // The PendingIntent to launch our activity if the user selects this notification
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, NavigationDrawerActivity.class), 0);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, RemindersFragment.class), 0);
 
         // Set the info for the views that show in the notification panel.
 /*        notification.setLatestEventInfo(this, title, text, contentIntent);
@@ -106,11 +106,14 @@ public class NotifyService extends Service {
                 // Set PendingIntent into Notification
                 .setContentIntent(contentIntent)
                 // Dismiss Notification
-                .setAutoCancel(true);
+                .setAutoCancel(true)
+                .addAction(0,"TAKE",contentIntent)
+                .addAction(0,"SNOOZE",contentIntent)
+                .addAction(0,"SKIP",contentIntent);
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplicationContext());
         stackBuilder.addParentStack(AddMedicationWithManualActivity.class);
-        stackBuilder.addNextIntent(new Intent(this, NavigationDrawerActivity.class));
+        stackBuilder.addNextIntent(new Intent(this, RemindersFragment.class));
 
         // Create Notification Manager
         NotificationManager notificationmanager = (NotificationManager) getApplicationContext()

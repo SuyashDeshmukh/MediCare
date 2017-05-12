@@ -14,6 +14,13 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:src="@drawable/med"
+            android:layout_weight="1.5"
+            />
 
 
         <TextView
@@ -21,8 +28,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/title_bottom_margin"
-            android:text="@string/google_title_text"
-            android:theme="@style/ThemeOverlay.MyTitleText" />
+            android:text="@string/welcome_message"
+            android:textSize="32sp"
+            android:layout_weight="1"/>
 
         <TextView
             android:id="@+id/status"
@@ -40,8 +48,7 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/grey_300">
+        android:layout_weight="1">
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/sign_in_button"
@@ -68,7 +75,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/sign_out"
-                android:theme="@style/ThemeOverlay.MyDarkButton" />
+                android:layout_marginRight="4dp"
+                android:layout_marginLeft="4dp"
+                android:textColor="@color/card_bg"
+                android:background="@color/card_title"/>
 
             <Button
                 android:id="@+id/disconnect_button"
@@ -76,7 +86,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/disconnect"
-                android:theme="@style/ThemeOverlay.MyDarkButton" />
+                android:layout_marginRight="4dp"
+                android:layout_marginLeft="4dp"
+                android:textColor="@color/card_bg"
+                android:background="@color/card_title"/>
         </LinearLayout>
 
     </RelativeLayout>

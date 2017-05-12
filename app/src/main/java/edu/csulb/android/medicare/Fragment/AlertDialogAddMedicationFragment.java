@@ -26,12 +26,12 @@ public class AlertDialogAddMedicationFragment extends DialogFragment {
                             case BARCODE:
                                 Intent intentBarcode = new Intent(getActivity(),AddMedicationWithBarcodeActivity.class);
                                 startActivity(intentBarcode);
-                                getActivity().finish();
+                               // getActivity().finish();
                                 break;
                             case MANUAL:
                                 Intent intentManual = new Intent(getActivity(),AddMedicationWithManualActivity.class);
                                 startActivity(intentManual);
-                                getActivity().finish();
+                                //getActivity().finish();
                                 break;
                         }
                     }

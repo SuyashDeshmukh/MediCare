@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="130dp"
     android:id="@+id/card_view"
     android:layout_margin="5dp"
     card_view:cardBackgroundColor="@color/card_bg"
@@ -28,6 +28,7 @@
             android:background="@color/card_title"
             android:padding="2dp"
             android:text=""
+            android:singleLine="true"
             android:textColor="@color/card_bg"
             android:textSize="20sp"
             android:layout_weight="0.52" />
@@ -39,21 +40,22 @@
             android:layout_marginRight="8dp"
             android:padding="2dp">
 
-            <TextView
+            <!--<TextView
                 android:id="@+id/textDistance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0.1mi"
-                android:textSize="16sp" />
+                android:textSize="16sp" />-->
 
             <TextView
                 android:id="@+id/textAddress"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=".Addess"
+                android:layout_height="40dp"
+                android:text="Addess"
                 android:textSize="16sp" />
         </LinearLayout>
 
+<!--
         <LinearLayout
             android:id="@+id/layoutLastTakenOn"
             android:layout_width="match_parent"
@@ -70,6 +72,7 @@
                 android:text="Open"
                 android:textSize="16sp" />
         </LinearLayout>
+-->
 
         <View
             android:layout_width="match_parent"
@@ -80,7 +83,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="38dp">
+            android:layout_height="30dp">
             <!--
             <ImageView
                 android:id="@+id/imageView2"
@@ -89,24 +92,24 @@
                 android:background="@color/card_bg"
                 android:src="@android:drawable/ic_menu_call" />-->
 
-            <Button
+            <!--<Button
                 android:id="@+id/btnSkip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:background="@color/card_bg"
                 android:text="CALL"
-                android:textColor="@color/card_title" />
+                android:textColor="@color/card_title" />-->
 
             <Button
-                android:id="@+id/btnTake"
+                android:id="@+id/btnPharmacyDir"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="10dp"
-                android:background="@color/card_bg"
+                android:background="@color/card_title"
                 android:text="DIRECTIONS"
-                android:textColor="@color/card_title" />
+                android:textColor="@color/card_bg" />
         </RelativeLayout>
     </LinearLayout>
 
