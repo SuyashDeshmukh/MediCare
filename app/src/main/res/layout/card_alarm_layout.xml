@@ -90,31 +90,7 @@
                     android:text=""
                     android:textSize="16sp"/>
             </LinearLayout>
-            <!--<View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:padding="2dp"
-                android:layout_margin="5dp"
-                android:background="#ddd"/>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/btnSkip"
-                    android:text="SKIP"
-                    android:background="@color/card_bg"/>
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/btnTake"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="0dp"
-                    android:text="TAKE"
-                    android:textColor="@color/card_title"
-                    android:background="@color/card_bg"/>
-            </RelativeLayout>-->
+
         </LinearLayout>
 
 

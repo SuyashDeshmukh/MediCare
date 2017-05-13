@@ -12,9 +12,9 @@ import java.util.List;
 import edu.csulb.android.medicare.R;
 import edu.csulb.android.medicare.Model.TimeQuantity;
 
-/**
- * Created by Samruddhi on 4/1/2017.
- */
+/*
+* Description: Custom Adapter to display frequency
+* */
 
 public class CustomFrequencyAdapter extends ArrayAdapter<TimeQuantity> {
     private List<TimeQuantity> timeQuantityList;

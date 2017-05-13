@@ -16,9 +16,9 @@ import edu.csulb.android.medicare.Model.Doctor;
 import edu.csulb.android.medicare.Model.Reminder;
 import edu.csulb.android.medicare.R;
 
-/**
- * Created by Samruddhi on 4/16/2017.
- */
+/*
+* Description: Recycler Adapter to display doctors
+* */
 
 public class RecyclerDoctorAdapter extends RecyclerView.Adapter<RecyclerDoctorAdapter.ViewHolder>  {
 
@@ -55,18 +55,7 @@ public class RecyclerDoctorAdapter extends RecyclerView.Adapter<RecyclerDoctorAd
 
                 }
             });
-            /*itemView.setOnClickListener(new View.OnClickListener() {
-                @Override public void onClick(View v) {
-                    int position = getAdapterPosition();
 
-                    Reminder reminder = reminders.get(position);
-                    Context context = itemView.getContext();
-                    Intent intent = new Intent(context, ViewMedicationActivity.class);
-                    intent.putExtra("reminder_id",reminder.getId());
-                    context.startActivity(intent);
-
-                }
-            });*/
         }
     }
 
@@ -88,11 +77,6 @@ public class RecyclerDoctorAdapter extends RecyclerView.Adapter<RecyclerDoctorAd
         directions = new Intent(android.content.Intent.ACTION_VIEW,
         Uri.parse("google.navigation:q="+address));
 
-/*
-        viewHolder.itemAddress.setText(doctors.get(i).getAddress());
-        viewHolder.itemTitle.setText(doctors.get(i).getTitle());
-        viewHolder.itemSpeciality.setText(doctors.get(i).getSpeciality());
-*/
     }
 
     @Override

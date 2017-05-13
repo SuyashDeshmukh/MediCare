@@ -19,9 +19,9 @@ import edu.csulb.android.medicare.Model.MedicationInformation;
 import edu.csulb.android.medicare.R;
 import edu.csulb.android.medicare.Activity.ViewMedicationActivity;
 
-/**
- * Created by Samruddhi on 4/13/2017.
- */
+/*
+* Description: Recycler Adapter to display medicines
+* */
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder>  {
 

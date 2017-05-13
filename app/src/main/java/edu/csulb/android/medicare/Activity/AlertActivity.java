@@ -24,7 +24,9 @@ import edu.csulb.android.medicare.Fragment.AlertReminderDialogFragment;
 import edu.csulb.android.medicare.Model.History;
 import edu.csulb.android.medicare.Model.Medication;
 import edu.csulb.android.medicare.R;
-
+/*
+* Description: to display alert as a dialog box
+* */
 public class AlertActivity extends FragmentActivity {
     PendingIntent pendingIntent;
     AlarmManager alarmManager;
@@ -35,15 +37,7 @@ public class AlertActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         db = new MedicationDatabaseHelper(getApplicationContext());
-       /* if(getIntent().getStringExtra("Source").matches("Service"))
-        {
-            isFirstAlarm=true;
-        }
-        else{
-            isFirstAlarm=false;
-        }*/
-
-        /** Creating an Alert Dialog Window */
+       // Create dialogn Window
         AlertReminderDialogFragment alertReminder = new AlertReminderDialogFragment();
 
         /** Opening the Alert Dialog Window. This will be opened when the alarm goes off */
@@ -62,8 +56,7 @@ public class AlertActivity extends FragmentActivity {
         intent.putExtra("medicine_name", medicineName);
 
         pendingIntent = PendingIntent.getActivity(getBaseContext(), _id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-       // pendingIntent = PendingIntent.getBroadcast(getBaseContext(), _id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        /** Getting a reference to the System Service ALARM_SERVICE */
+
         alarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
 
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, min, pendingIntent);
@@ -73,7 +66,7 @@ public class AlertActivity extends FragmentActivity {
 
     }
 
-    // I took it
+    // I took medicine
     public void doPositiveClick(String medicationName){
         Medication medication = db.getMedicationByName(medicationName);
         History history = new History();
@@ -110,7 +103,7 @@ public class AlertActivity extends FragmentActivity {
         finish();
     }
 
-    // I won't take it
+    // I skipped
     public void doNegativeClick(){
         finish();
     }

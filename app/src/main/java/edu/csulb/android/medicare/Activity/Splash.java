@@ -7,7 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import edu.csulb.android.medicare.R;
-
+/*
+* Description: Activity to show splash screen
+* */
 public class Splash extends AppCompatActivity {
 
     @Override

@@ -6,9 +6,9 @@ import java.util.List;
 
 import edu.csulb.android.medicare.Model.Contact;
 
-/**
- * Created by Suyash on 06-May-17.
- */
+/*
+* Description: Contacts Model
+* */
 
 public class Contacts {
     private MedicationDatabaseHelper db;

@@ -30,11 +30,7 @@ import edu.csulb.android.medicare.R;
 import edu.csulb.android.medicare.Utility.SharedValues;
 
 /**
- * Demonstrate Firebase Authentication using a Google ID Token.
- */
-
-/**
- * Created by Suyash on 06-Apr-17.
+ * Description: Demonstrate Firebase Authentication using a Google ID Token.
  */
 
 public class GoogleSignInActivity extends BaseActivity implements
@@ -172,9 +168,7 @@ public class GoogleSignInActivity extends BaseActivity implements
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
 
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
+                        // If sign in fails, display a message to the user.
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithCredential", task.getException());
                             Toast.makeText(GoogleSignInActivity.this, "Authentication failed.",

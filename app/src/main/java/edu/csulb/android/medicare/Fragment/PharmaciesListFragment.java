@@ -35,7 +35,9 @@ import edu.csulb.android.medicare.Adapter.RecyclerPharmacyAdapter;
 import edu.csulb.android.medicare.Model.Pharmacy;
 import edu.csulb.android.medicare.R;
 
-
+/*
+* Description: Fragment to update Pharmacies List
+* */
 public class PharmaciesListFragment extends Fragment {
     ProgressBar progressBar;
     private View mProgressView;

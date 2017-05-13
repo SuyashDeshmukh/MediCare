@@ -10,9 +10,9 @@ import java.util.Calendar;
 
 import edu.csulb.android.medicare.Utility.AlarmTask;
 
-/**
- * Created by Samruddhi on 4/3/2017.
- */
+/*
+* Description: Service to schedule reminders
+* */
 
 public class ScheduleService extends Service {
 

@@ -31,11 +31,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import edu.csulb.android.medicare.R;
-
-/**
- * Created by Suyash on 06-Apr-17.
- */
-
+/*
+* Description: To add medication by scanning barcode
+* Uses barcode finder API and dailymed API
+* */
 public class AddMedicationWithBarcodeActivity extends AppCompatActivity {
 
     ProgressBar progressBar;
@@ -104,8 +103,7 @@ public class AddMedicationWithBarcodeActivity extends AppCompatActivity {
 
     }
 
-
-
+    // Call Scan Barcode to scan the barcode of medicines
     public void scanBarcode(){
         IntentIntegrator intentIntegrator = new IntentIntegrator(activity);
         intentIntegrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
@@ -131,15 +129,6 @@ public class AddMedicationWithBarcodeActivity extends AppCompatActivity {
                     changeFormats(code);
                     task = new Task();
                     task.execute("Values");
-                  /*while(task.getStatus()!= AsyncTask.Status.FINISHED) {
-                        try {
-                            progressBar.
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }*/
-
-
                 }
             } else {
                 super.onActivityResult(requestCode, resultCode, intent);
@@ -147,15 +136,6 @@ public class AddMedicationWithBarcodeActivity extends AppCompatActivity {
         } else {
             super.onActivityResult(requestCode, resultCode, intent);
         }
-       /* if(product.getText().toString().matches("Product Name"))
-        {
-            try {
-                Thread.sleep(5000);
-            }catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
-        }*/
 
     }
 
@@ -238,15 +218,11 @@ public class AddMedicationWithBarcodeActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean success) {
-            //if(!product.getText().toString().matches("Product Name will be displayed here")) {
+
                 btnNext.setEnabled(true);
                 btnNext.setBackgroundColor(getColor(R.color.card_title));
                 btnNext.setTextColor(getColor(R.color.card_bg));
-            //}
-            //else
-            //{
-              //  Toast.makeText(AddMedicationWithBarcodeActivity.this, "Barcode not recognized!\nPlease enter NDC value or add medicine manually.", Toast.LENGTH_SHORT).show();
-            //}
+
         }
 
         @Override
@@ -340,7 +316,7 @@ public class AddMedicationWithBarcodeActivity extends AppCompatActivity {
             else
             {
                 isProductEmpty = false;
-               // product.setText("No Product Found");
+
                 Log.e("Error","Item Not found!");
             }
 

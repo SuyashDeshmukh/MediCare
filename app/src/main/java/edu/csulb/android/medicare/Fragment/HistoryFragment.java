@@ -19,7 +19,9 @@ import edu.csulb.android.medicare.Model.History;
 import edu.csulb.android.medicare.Model.Reminder;
 import edu.csulb.android.medicare.R;
 
-
+/*
+* Description: Fragment to updte history
+* */
 public class HistoryFragment extends Fragment {
     List<History> histories;
     PillBox pillBox =  new PillBox();

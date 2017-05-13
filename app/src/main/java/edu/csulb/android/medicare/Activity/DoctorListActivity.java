@@ -8,7 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import edu.csulb.android.medicare.Adapter.RecyclerDoctorAdapter;
 import edu.csulb.android.medicare.Fragment.FindDoctorFragment;
 import edu.csulb.android.medicare.R;
-
+/*
+* Description: to display list of doctors based on query passed to better doctor api
+* */
 public class DoctorListActivity extends AppCompatActivity {
 
     private LinearLayoutManager layoutManager;

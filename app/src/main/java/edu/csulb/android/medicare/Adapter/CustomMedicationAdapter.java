@@ -15,9 +15,9 @@ import edu.csulb.android.medicare.Model.MedicationInformation;
 import edu.csulb.android.medicare.Model.Reminder;
 import edu.csulb.android.medicare.R;
 
-/**
- * Created by Samruddhi on 4/3/2017.
- */
+/*
+* Description: Custom Adapter to display medications
+* */
 
 public class CustomMedicationAdapter extends ArrayAdapter<MedicationInformation> {
     private List<MedicationInformation> medicationList;

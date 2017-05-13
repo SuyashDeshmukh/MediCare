@@ -11,7 +11,9 @@ import edu.csulb.android.medicare.Model.Medication;
 import edu.csulb.android.medicare.Model.MedicationInformation;
 import edu.csulb.android.medicare.Model.Reminder;
 import edu.csulb.android.medicare.R;
-
+/*
+* Description: Activity to view medications in the list
+* */
 public class ViewMedicationActivity extends AppCompatActivity {
 
     private TextView txtMedicineName, txtStartTime, txtStartDate, txtRepeatTime, txtNumberOfDays, txtDaysOfWeek, txtDosage, txtInstructions;

@@ -10,7 +10,9 @@ import java.util.List;
 import edu.csulb.android.medicare.Adapter.RecyclerAlarmAdapter;
 import edu.csulb.android.medicare.Model.MedicationInformation;
 import edu.csulb.android.medicare.R;
-
+/*
+* Description: Activity to view list of alarms
+* */
 public class ViewAlarmActivity extends AppCompatActivity {
 
     private LinearLayoutManager layoutManager;
@@ -26,7 +28,5 @@ public class ViewAlarmActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        //recyclerAlarmAdapter = new RecyclerAlarmAdapter(medicationInformations,getApplicationContext());
-        //recyclerView.setAdapter(recyclerAlarmAdapter);
     }
 }

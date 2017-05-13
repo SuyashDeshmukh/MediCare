@@ -9,9 +9,9 @@ import java.util.Calendar;
 
 import edu.csulb.android.medicare.Service.NotifyService;
 
-/**
- * Created by Samruddhi on 4/3/2017.
- */
+/*
+* Description: Alarm Task thread
+* */
 
 public class AlarmTask implements Runnable{
     // The date selected for the alarm

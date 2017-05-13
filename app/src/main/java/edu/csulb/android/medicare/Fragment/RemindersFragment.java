@@ -13,7 +13,9 @@ import java.util.List;
 
 import edu.csulb.android.medicare.Adapter.SectionsPagerAdapter;
 import edu.csulb.android.medicare.R;
-
+/*
+* Description: Fragment to update Reminders List
+* */
 public class RemindersFragment extends Fragment {
     private SectionsPagerAdapter mSectionsPagerAdapter;
 

@@ -16,9 +16,9 @@ import java.io.IOException;
 
 import edu.csulb.android.medicare.Activity.AlertActivity;
 
-/**
- * Created by Samruddhi on 5/6/2017.
- */
+/*
+* Description: Fragment to alert reminder with dialog
+* */
 
 public class AlertReminderDialogFragment extends DialogFragment {
     MediaPlayer mMediaPlayer;

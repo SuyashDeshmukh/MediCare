@@ -5,10 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
 import edu.csulb.android.medicare.Adapter.RecyclerAdapter;
-
-/**
- * Created by Samruddhi on 4/16/2017.
- */
+/*
+* Description: Helper to handle medicine adapter on touch
+* */
 
 public class MedicineTouchHelper extends ItemTouchHelper.SimpleCallback {
     private RecyclerAdapter recyclerAdapter;

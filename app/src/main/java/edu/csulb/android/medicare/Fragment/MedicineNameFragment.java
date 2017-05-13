@@ -11,7 +11,9 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
 import edu.csulb.android.medicare.R;
-
+/*
+* Description: Fragment for medicine name
+* */
 public class MedicineNameFragment extends Fragment {
     private static final String[] MEDICINES = new String[] {
             "Aspirin", "Crocin", "Saridon", "Zintac", "Benedryl"

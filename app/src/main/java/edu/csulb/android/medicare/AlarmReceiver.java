@@ -15,9 +15,9 @@ import android.util.Log;
 import edu.csulb.android.medicare.Activity.AlertActivity;
 import edu.csulb.android.medicare.Activity.NavigationDrawerActivity;
 
-/**
- * Created by Suyash on 06-Apr-17.
- */
+/*
+* Description: Alarm Receiver for reminders
+* */
 
 public class AlarmReceiver extends BroadcastReceiver {
 

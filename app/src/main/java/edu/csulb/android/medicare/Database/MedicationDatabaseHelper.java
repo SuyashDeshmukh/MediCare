@@ -18,9 +18,9 @@ import edu.csulb.android.medicare.Model.Medication;
 import edu.csulb.android.medicare.Model.MedicationInformation;
 import edu.csulb.android.medicare.Model.Reminder;
 
-/**
- * Created by Samruddhi on 4/2/2017.
- */
+/*
+* Description: Database Helper for to store medications
+* */
 
 public class MedicationDatabaseHelper extends SQLiteOpenHelper {
     // Database Version

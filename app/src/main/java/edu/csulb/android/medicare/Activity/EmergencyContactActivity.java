@@ -26,7 +26,9 @@ import edu.csulb.android.medicare.R;
 
 import static edu.csulb.android.medicare.Fragment.ContactListFragment.customContactAdapter;
 import static edu.csulb.android.medicare.Fragment.ContactListFragment.listViewContacts;
-
+/*
+* Description: Activiy to add emergency contact of the patient
+* */
 public class EmergencyContactActivity extends AppCompatActivity {
     EditText edtContactName, edtContactNumber,edtContactEmail;
     Button btnAddContact, btnCancel;

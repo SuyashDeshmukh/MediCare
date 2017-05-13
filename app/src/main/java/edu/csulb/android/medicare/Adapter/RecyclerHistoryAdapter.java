@@ -13,9 +13,9 @@ import edu.csulb.android.medicare.Model.History;
 import edu.csulb.android.medicare.Model.Reminder;
 import edu.csulb.android.medicare.R;
 
-/**
- * Created by Samruddhi on 4/16/2017.
- */
+/*
+* Description: Recycler Adapter to display history
+* */
 
 public class RecyclerHistoryAdapter extends RecyclerView.Adapter<RecyclerHistoryAdapter.ViewHolder>  {
 
@@ -38,18 +38,7 @@ public class RecyclerHistoryAdapter extends RecyclerView.Adapter<RecyclerHistory
             itemMedicineName = (TextView)itemView.findViewById(R.id.textMedicineName);
             itemTakenDate = (TextView)itemView.findViewById(R.id.takenOn);
             itemTakenTime = (TextView)itemView.findViewById(R.id.textTime);
-            /*itemView.setOnClickListener(new View.OnClickListener() {
-                @Override public void onClick(View v) {
-                    int position = getAdapterPosition();
 
-                    Reminder reminder = reminders.get(position);
-                    Context context = itemView.getContext();
-                    Intent intent = new Intent(context, ViewMedicationActivity.class);
-                    intent.putExtra("reminder_id",reminder.getId());
-                    context.startActivity(intent);
-
-                }
-            });*/
         }
     }
 

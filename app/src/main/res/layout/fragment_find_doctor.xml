@@ -20,20 +20,7 @@
         android:orientation="vertical"
         android:id="@+id/doctors_form">
 
-            <!--<TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Search Query"
-                android:textSize="20dp"
-                android:gravity="center"
-                />
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/query_value"
-                android:id="@+id/queryvalue"
-                android:gravity="center"
-                />-->
+
         <android.support.v7.widget.CardView
             xmlns:card_view="http://schemas.Android.com/apk/res-auto"
             android:layout_gravity="center"
@@ -111,43 +98,7 @@
                 </RadioGroup>
             </LinearLayout>
         </android.support.v7.widget.CardView>
-<!--
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-                <TextView
-                    android:id="@+id/txtLocation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:textSize="20dp"
-                    android:text="Gender"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    />
 
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/radioGroupGender">
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/radioMale"
-                        android:checked="true"
-                        android:onClick="onClickGender"
-                        android:text="Male"/>
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/radioFemale"
-                        android:checked="false"
-                        android:onClick="onClickGender"
-                        android:text="Female"/>
-                </RadioGroup>
-            </LinearLayout>
--->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

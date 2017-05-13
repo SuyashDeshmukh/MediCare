@@ -15,9 +15,9 @@ import android.util.Log;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-/**
- * Created by Samruddhi on 4/13/2017.
- */
+/*
+* Description: Reminder Manager
+* */
 
 public class ReminderManager {
     private int _year;

@@ -19,7 +19,8 @@ import edu.csulb.android.medicare.R;
 /**
  * Customized Expandable List Adapter
  * http://www.androidhive.info/2013/07/android-expandable-list-view-tutorial/
- */
+* Description: Custom Adapter to display reminders by medicine
+* */
 
 public class ExpandableViewAdapter extends BaseExpandableListAdapter {
 

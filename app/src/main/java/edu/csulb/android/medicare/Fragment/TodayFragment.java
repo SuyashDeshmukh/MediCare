@@ -28,7 +28,9 @@ import edu.csulb.android.medicare.Database.PillBox;
 import edu.csulb.android.medicare.Model.MedicationInformation;
 import edu.csulb.android.medicare.Model.Reminder;
 import edu.csulb.android.medicare.R;
-
+/*
+* Description: Fragment to update Today's reminders
+* */
 public class TodayFragment extends Fragment {
     List<Reminder> reminders;
     PillBox pillBox =  new PillBox();
@@ -64,46 +66,6 @@ public class TodayFragment extends Fragment {
         recyclerAdapter = new RecyclerAlarmAdapter(reminders,getActivity());
         recyclerView.setAdapter(recyclerAdapter);
 
-        /*if(reminders.size() != 0) {
-            for(Reminder alarm: reminders) {
-                TableRow tbrow = new TableRow(container.getContext());
-
-                TextView t1v = new TextView(container.getContext());
-                t1v.setText(alarm.getMedicineName());
-                t1v.setTextColor(Color.WHITE);
-                t1v.setGravity(Gravity.CENTER);
-                t1v.setPadding(30, 30, 30, 30);
-                t1v.setTextSize(25);
-                t1v.setMaxEms(6);
-
-                tbrow.addView(t1v);
-
-                TextView t2v = new TextView(container.getContext());
-
-                String time = alarm.getStringTime();
-                t2v.setText(time);
-                t2v.setTextColor(Color.WHITE);
-                t2v.setGravity(Gravity.CENTER);
-                t2v.setPadding(30, 30, 30, 30);
-                t2v.setTextSize(25);
-                tbrow.addView(t2v);
-
-                stk.addView(tbrow);
-            }
-        } else {
-            TableRow tbrow = new TableRow(container.getContext());
-
-            TextView t1v = new TextView(container.getContext());
-            t1v.setText("You don't have any alarms for Today!");
-            t1v.setTextColor(Color.WHITE);
-            t1v.setGravity(Gravity.CENTER);
-            t1v.setPadding(30, 30, 30, 30);
-            t1v.setTextSize(25);
-            t1v.setMaxEms(10);
-            tbrow.addView(t1v);
-
-            stk.addView(tbrow);
-        }*/
         return view;
     }
 

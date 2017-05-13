@@ -33,7 +33,9 @@ import edu.csulb.android.medicare.Adapter.RecyclerPharmacyAdapter;
 import edu.csulb.android.medicare.Model.MedicationInformation;
 import edu.csulb.android.medicare.Model.Pharmacy;
 import edu.csulb.android.medicare.R;
-
+/*
+* Description: Activity to find nearby pharmacies based on user location
+* */
 public class PharmaciesListActivity extends AppCompatActivity {
     ProgressBar progressBar;
     private View mProgressView;

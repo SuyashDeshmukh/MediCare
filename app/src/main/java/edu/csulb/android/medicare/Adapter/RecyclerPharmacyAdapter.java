@@ -17,9 +17,9 @@ import edu.csulb.android.medicare.Model.Pharmacy;
 import edu.csulb.android.medicare.R;
 import edu.csulb.android.medicare.Activity.ViewMedicationActivity;
 
-/**
- * Created by Samruddhi on 4/16/2017.
- */
+/*
+* Description: Recycler Adapter to display pharmacies
+* */
 
 public class RecyclerPharmacyAdapter extends RecyclerView.Adapter<RecyclerPharmacyAdapter.ViewHolder> {
 
@@ -46,20 +46,6 @@ public class RecyclerPharmacyAdapter extends RecyclerView.Adapter<RecyclerPharma
             itemPharmacyName = (TextView) itemView.findViewById(R.id.textPharmacyName);
             itemAddress = (TextView) itemView.findViewById(R.id.textAddress);
             getDirections=(Button)itemView.findViewById(R.id.btnPharmacyDir);
-            //itemIsOpen = (TextView) itemView.findViewById(R.id.textIsOpen);
-            /*itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-
-                    Pharmacy pharmacy = pharmacyList.get(position);
-                    Context context = itemView.getContext();
-                    Intent intent = new Intent(context, ViewMedicationActivity.class);
-                    context.startActivity(intent);
-
-                }
-            });*/
-
             getDirections.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

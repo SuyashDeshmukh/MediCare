@@ -45,7 +45,9 @@ import edu.csulb.android.medicare.Model.MedicationInformation;
 import edu.csulb.android.medicare.Model.Reminder;
 import edu.csulb.android.medicare.Model.TimeQuantity;
 import edu.csulb.android.medicare.R;
-
+/*
+* Description: To add medication manually
+* */
 public class AddMedicationWithManualActivity extends AppCompatActivity {
 
     private AutoCompleteTextView medicineName;
@@ -134,8 +136,6 @@ public class AddMedicationWithManualActivity extends AppCompatActivity {
         textDosage = (TextView) findViewById(R.id.dosage);
         textStartTime = (TextView) findViewById(R.id.startTime);
         textStartDate = (TextView) findViewById(R.id.startDate);
-        //repeatTime = (EditText) findViewById(R.id.edit_repeat);
-        //spinnerRepeatUnit = (Spinner) findViewById(R.id.spinnerRepeatUnit);
         radioGroupDays = (RadioGroup) findViewById(R.id.radioGroupDays);
         radioGroupInstructions = (RadioGroup) findViewById(R.id.radioGroupInstructions);
         saveMedication = (Button) findViewById(R.id.buttonSaveMedication);
@@ -157,27 +157,6 @@ public class AddMedicationWithManualActivity extends AppCompatActivity {
         if(medName!=null)
             medicineName.setText(medName);
         dosageUnit = getResources().getStringArray(R.array.dosage_options)[0];
-// Create an ArrayAdapter using the string array and a default spinner layout
-/*        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.repeat_unit_options, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-        spinnerRepeatUnit.setAdapter(adapter);
-
-        spinnerRepeatUnit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //repeatTime.setText("");
-                reminderTimeUnit = getResources().getStringArray(R.array.repeat_unit_options)[position].toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });*/
-
 
         textStartTime.setText(setTime(currentHour,currentMinute));
         startTimeLayout.setOnClickListener(new View.OnClickListener() {
@@ -200,12 +179,7 @@ public class AddMedicationWithManualActivity extends AppCompatActivity {
             }
         });
         textStartDate.setText(getTodayDate());
-        /*startDateLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                displayDatePicker();
-            }
-        });*/
+
         textDosage.setText(dosageValue+" "+dosageUnit);
         dosagelayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -235,11 +209,6 @@ public class AddMedicationWithManualActivity extends AppCompatActivity {
             medicineName.setError("Medicine name is required!");
             cancel = true;
         }
-        /*//Medication Name
-        if(repeatTime.getText().toString().trim().equals("")){
-            repeatTime.setError("Repeat time is required!");
-            cancel = true;
-        }*/
 
         Reminder reminder = new Reminder();
 
@@ -296,18 +265,14 @@ public class AddMedicationWithManualActivity extends AppCompatActivity {
                 int id = (int) _id;
                 checkBoxCounter++;
 
-                /** This intent invokes the activity AlertActivity, which in turn opens the AlertAlarm window */
-                //Intent intent = new Intent(getBaseContext(), AlertActivity.class);
+                /** This intent invokes the activity AlertActivity */
                 Intent intent = new Intent(getBaseContext(), AlarmReceiver.class);
                 intent.putExtra("medicine_name", med_name);
 
-                //pendingIntent = PendingIntent.getActivity(getBaseContext(), id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                pendingIntent = PendingIntent.getBroadcast(getBaseContext(), id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-                /** Getting a reference to the System Service ALARM_SERVICE */
+                pendingIntent = PendingIntent.getBroadcast(getBaseContext(), id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                 alarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
 
-                /** Creating a calendar object corresponding to the date and time set by the user */
                 Calendar calendar = Calendar.getInstance();
 
                 calendar.set(Calendar.HOUR_OF_DAY, startHour);
@@ -316,7 +281,6 @@ public class AddMedicationWithManualActivity extends AppCompatActivity {
                 calendar.set(Calendar.MILLISECOND, 0);
                 calendar.set(Calendar.DAY_OF_WEEK, dayOfWeek);
 
-                /** Converting the date and time in to milliseconds elapsed since epoch */
                 long alarm_time = calendar.getTimeInMillis();
 
                 if (calendar.before(Calendar.getInstance()))
@@ -415,49 +379,7 @@ public class AddMedicationWithManualActivity extends AppCompatActivity {
         datePicker.setTitle("Set Start Date");
         datePicker.show();
     }
-    /*public void saveMedication(){
-        MedicationDatabaseHelper databaseHelper = new MedicationDatabaseHelper(getApplicationContext());
-        boolean cancel = false;
-        //Medication Name
-        if(medicineName.getText().toString().trim().equals("")){
-            medicineName.setError("Medicine name is required!");
-            cancel = true;
-        }
-        //Medication Name
-        if(repeatTime.getText().toString().trim().equals("")){
-            repeatTime.setError("Repeat time is required!");
-            cancel = true;
-        }
-        reminderTimeQuntity = repeatTime.getText().toString();
-        long reminder_id = addReminder();
-        long medication_id = addMedication(reminder_id);
-        MedicationInformation medicationInformation = databaseHelper.getMedicationInformationFromID(medication_id);
-        int hour = medicationInformation.getHour();
-        int minute = medicationInformation.getMinute();
-        // Date Format: month/day/year
-        String date = medicationInformation.getStartDate();
-        //Log.d("date",date);
-        addAlarm(hour,minute,medication_id);
-        if(!cancel) {
-            Intent intent = new Intent(AddMedicationWithManualActivity.this, NavigationDrawerActivity.class);
-            startActivity(intent);
-            finish();
-        }
-    }*/
 
-    /*public long addReminder(){
-        MedicationDatabaseHelper databaseHelper = new MedicationDatabaseHelper(getApplicationContext());
-        Reminder reminder = new Reminder();
-        reminder.setRepeatTime(reminderTimeQuntity+" "+reminderTimeUnit);
-        reminder.setDaysOfWeek(daysOfWeek);
-        reminder.setNumberOfDays(duration_no_of_days);
-        reminder.setHour(startHour);
-        reminder.setMinute(startMinute);
-        reminder.setStartDate(startDate);
-        long reminder_id = databaseHelper.insertReminder(reminder);
-        databaseHelper.close();
-        return reminder_id;
-    }*/
 
     private void addAlarm(int hr,int min,long id) {
         String[] dividedDate = startDate.split("/");
@@ -476,10 +398,6 @@ public class AddMedicationWithManualActivity extends AppCompatActivity {
         int startMonth=Integer.parseInt(dividedDate[0]);
         ///Create a calendar object corresponding to the time set by the user
         Calendar calendar = Calendar.getInstance();
-        /*calendar.set(Calendar.HOUR_OF_DAY, hr);
-        calendar.set(Calendar.MINUTE, min);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);*/
         Log.e("Details :","Year:"+startYear);
         Log.e("Details :","Month:"+startMonth);
         Log.e("Details :","Day:"+startDay);
@@ -489,19 +407,6 @@ public class AddMedicationWithManualActivity extends AppCompatActivity {
         calendar.set(startYear,startMonth,startDay,hr,min);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),1000*60*repeatAfterMins,pendingIntent);
     }
-
-    /*public long addMedication(long reminder_id){
-        MedicationDatabaseHelper databaseHelper = new MedicationDatabaseHelper(getApplicationContext());
-        Medication medication = new Medication();
-        medication.setMedicationName(medicineName.getText().toString());
-        medication.setDosageUnit(dosageUnit);
-        medication.setDosageQuantity(dosageValue+"");
-        medication.setInstructions(instructions);
-        medication.setKeyReminder(reminder_id);
-        long medication_id = databaseHelper.insertMedication(medication);
-        databaseHelper.close();
-        return medication_id;
-    }*/
 
     public void onClickDays(View view){
         final String[] daysofweek = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};

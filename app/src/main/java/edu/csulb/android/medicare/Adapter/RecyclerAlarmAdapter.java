@@ -15,9 +15,9 @@ import edu.csulb.android.medicare.Model.Reminder;
 import edu.csulb.android.medicare.R;
 import edu.csulb.android.medicare.Activity.ViewMedicationActivity;
 
-/**
- * Created by Samruddhi on 4/16/2017.
- */
+/*
+* Description: Recycler Adapter to display alarms
+* */
 
 public class RecyclerAlarmAdapter extends RecyclerView.Adapter<RecyclerAlarmAdapter.ViewHolder>  {
 

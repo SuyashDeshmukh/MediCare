@@ -19,7 +19,9 @@ import java.util.List;
 import edu.csulb.android.medicare.Database.PillBox;
 import edu.csulb.android.medicare.Model.Reminder;
 import edu.csulb.android.medicare.R;
-
+/*
+* Description: Activity to show medicines as a weekly view
+* */
 public class WeeklyViewActivity extends AppCompatActivity {
 
     @Override

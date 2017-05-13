@@ -10,11 +10,9 @@ import edu.csulb.android.medicare.Model.History;
 import edu.csulb.android.medicare.Model.Medication;
 import edu.csulb.android.medicare.Model.Reminder;
 
-/**
- * Created by CharlesPK3 on 4/3/15.
- * Is used to retrieve pills and alarms by other classes.
- * Has access to and can read and write to the database.
- */
+/*
+* Description: PillBox Model
+* */
 public class PillBox {
     private MedicationDatabaseHelper db;
     private static List<Long> tempIds; // Ids of the alarms to be deleted or edited

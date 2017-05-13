@@ -40,12 +40,6 @@
             android:layout_marginRight="8dp"
             android:padding="2dp">
 
-            <!--<TextView
-                android:id="@+id/textDistance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0.1mi"
-                android:textSize="16sp" />-->
 
             <TextView
                 android:id="@+id/textAddress"
@@ -55,24 +49,7 @@
                 android:textSize="16sp" />
         </LinearLayout>
 
-<!--
-        <LinearLayout
-            android:id="@+id/layoutLastTakenOn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:padding="2dp"
-            android:weightSum="1">
 
-            <TextView
-                android:id="@+id/textIsOpen"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Open"
-                android:textSize="16sp" />
-        </LinearLayout>
--->
 
         <View
             android:layout_width="match_parent"
@@ -84,22 +61,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="30dp">
-            <!--
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/card_bg"
-                android:src="@android:drawable/ic_menu_call" />-->
 
-            <!--<Button
-                android:id="@+id/btnSkip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:background="@color/card_bg"
-                android:text="CALL"
-                android:textColor="@color/card_title" />-->
 
             <Button
                 android:id="@+id/btnPharmacyDir"

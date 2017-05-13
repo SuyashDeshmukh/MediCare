@@ -45,7 +45,9 @@ import edu.csulb.android.medicare.Utility.SharedValues;
 import android.support.v4.app.FragmentManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+/*
+* Description: Main Activiy which contains all the fragments
+* */
 public class NavigationDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     //ListView listViewMedication;
@@ -68,9 +70,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
         setContentView(R.layout.activity_navigation_drawer);
         String email = SharedValues.getValue("Email");
         String name = SharedValues.getValue("Name");
-        //String email = getIntent().getStringExtra("Email");
-        //String name = getIntent().getStringExtra("Name");
-        //Uri image = Uri.parse(getIntent().getStringExtra("Image"));
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View hView =  navigationView.getHeaderView(0);
         userEmail= (TextView)hView.findViewById(R.id.userEmail);
@@ -147,11 +147,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        /*if (id == R.id.action_settings) {
-            Intent intent =  new Intent(this,SettingsActivity.class);
-            startActivity(intent);
-            return true;
-        } else */if (id == R.id.action_weeklyview) {
+        if (id == R.id.action_weeklyview) {
             Intent intent =  new Intent(this,WeeklyViewActivity.class);
             startActivity(intent);
             return true;
@@ -178,14 +174,12 @@ public class NavigationDrawerActivity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.content_frame, new ViewAllMedicationsFragment()).commit();
             toolbar.setTitle("Medications");
             fab.hide();
-            /*Intent i = new Intent(this, NavigationDrawerActivity.class);
-            startActivity(i);*/
+
         } else if (id == R.id.nav_slideshow) {
             fragmentManager.beginTransaction().replace(R.id.content_frame, new PharmaciesListFragment()).commit();
             toolbar.setTitle("Nearby Pharmacies");
             fab.hide();
-            /*Intent i = new Intent(this, PharmaciesListActivity.class);
-            startActivity(i);*/
+
 
         } else if (id == R.id.nav_share) {
             fragmentManager.beginTransaction().replace(R.id.content_frame, new FindDoctorFragment()).commit();
@@ -203,8 +197,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
                     startActivity(i);
                 }
             });
-            /*Intent i = new Intent(this, EmergencyContactActivity.class);
-            startActivity(i);*/
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -218,22 +211,6 @@ public class NavigationDrawerActivity extends AppCompatActivity
         alertDialogAddMedicationFragment.show(getSupportFragmentManager(),"question");
 
     }
-
-    /*public void loadMedicationsList(){
-        MedicationDatabaseHelper db = new MedicationDatabaseHelper(getApplicationContext());
-        medicationInformations = db.getAllMedicationInformationList();
-        listViewMedication.setAdapter(new CustomMedicationAdapter(this, R.layout.custom_row_medication, medicationInformations));
-        db.close();
-        listViewMedication.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MedicationInformation medicationInformation = medicationInformations.get(position);
-                Intent intent = new Intent(getApplicationContext(), ViewMedicationActivity.class);
-                intent.putExtra("medication_id",medicationInformation.getId());
-                startActivity(intent);
-            }
-        });
-    }*/
 
     public void loadMedicationsList() throws URISyntaxException {
         MedicationDatabaseHelper db = new MedicationDatabaseHelper(getApplicationContext());
@@ -265,35 +242,4 @@ public class NavigationDrawerActivity extends AppCompatActivity
         inflater.inflate(R.menu.context_menu, menu);
     }
 
-/*
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        switch (item.getItemId()) {
-            case R.id.action_delete:
-                deleteMedication(info.position);
-                Toast.makeText(this, "Deleted!", Toast.LENGTH_SHORT).show();
-                loadMedicationsList();
-                // TODO: Implement Delete
-                return true;
-            default:
-                return super.onContextItemSelected(item);
-        }
-    }
-*/
-/*
-    public void deleteMedication(int position) {
-        MedicationDatabaseHelper db = new MedicationDatabaseHelper(getApplicationContext());
-        final List<MedicationInformation> notes = db.getAllMedicationInformationList();
-        long medicatioID = notes.get(position).getId();
-        cancelAlarm(medicatioID);
-        db.deleteMedication(medicatioID);
-    }
-
-    private void cancelAlarm(long medicatioID) {
-        AlarmManager alarmManager = (AlarmManager)getApplicationContext().getSystemService(getApplicationContext().ALARM_SERVICE);
-        Intent myIntent = new Intent(this , AlarmReceiver.class);
-        PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(),(int)medicatioID ,myIntent,PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmManager.cancel(pi);
-    }*/
 }

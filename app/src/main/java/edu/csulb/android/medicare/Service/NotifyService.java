@@ -15,9 +15,9 @@ import edu.csulb.android.medicare.Activity.AddMedicationWithManualActivity;
 import edu.csulb.android.medicare.Fragment.RemindersFragment;
 import edu.csulb.android.medicare.R;
 
-/**
- * Created by Samruddhi on 4/3/2017.
- */
+/*
+* Description: Service to notify user
+* */
 
 public class NotifyService extends Service {
 

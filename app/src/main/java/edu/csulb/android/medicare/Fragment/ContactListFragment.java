@@ -41,7 +41,9 @@ import edu.csulb.android.medicare.Model.Contact;
 import edu.csulb.android.medicare.Model.Pharmacy;
 import edu.csulb.android.medicare.R;
 
-
+/*
+* Description: Recycler Adapter to display contacts
+* */
 public class ContactListFragment extends Fragment {
     ProgressBar progressBar;
     private View mProgressView;
@@ -58,14 +60,7 @@ public class ContactListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_contact_list_list, container, false);
-        /*btnAddContact = (Button) view.findViewById(R.id.btnAddContact);
-        btnAddContact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),EmergencyContactActivity.class);
-                startActivity(intent);
-            }
-        });*/
+
         listViewContacts = (ListView) view.findViewById(R.id.listViewContacts);
         contactList = contacts.getAllContactNames(getContext());
         customContactAdapter = new CustomContactAdapter(getContext(), R.layout.custom_row_contact, contactList);

@@ -6,9 +6,9 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.List;
 
-/**
- * Created by Samruddhi on 5/4/2017.
- */
+/*
+* Description: Recycler Adapter to display tabs for the reminders
+* */
 
 public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 

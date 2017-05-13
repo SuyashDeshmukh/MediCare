@@ -10,10 +10,6 @@ import java.util.Calendar;
 
 import edu.csulb.android.medicare.Service.ScheduleService;
 
-/**
- * Created by Samruddhi on 4/3/2017.
- */
-
 public class ScheduleClient {
 
     // The hook into our service

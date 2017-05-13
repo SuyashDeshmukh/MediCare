@@ -16,9 +16,9 @@ import edu.csulb.android.medicare.Model.Contact;
 import edu.csulb.android.medicare.Model.TimeQuantity;
 import edu.csulb.android.medicare.R;
 
-/**
- * Created by Samruddhi on 4/1/2017.
- */
+/*
+* Description: Custom Adapter to display contacts
+* */
 
 public class CustomContactAdapter extends ArrayAdapter<Contact> {
     private List<Contact> contacts;

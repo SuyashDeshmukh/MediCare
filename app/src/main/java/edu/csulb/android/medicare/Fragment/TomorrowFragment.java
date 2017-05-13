@@ -22,13 +22,14 @@ import edu.csulb.android.medicare.Database.PillBox;
 import edu.csulb.android.medicare.Model.MedicationInformation;
 import edu.csulb.android.medicare.Model.Reminder;
 import edu.csulb.android.medicare.R;
-
+/*
+* Description: Fragment to update Tomorrow's List Reminders
+* */
 public class TomorrowFragment extends Fragment {
     List<Reminder> reminders;
     PillBox pillBox =  new PillBox();
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
-    //private RecyclerView.Adapter adapter;
     private RecyclerAlarmAdapter recyclerAdapter;
 
     @Override
@@ -36,9 +37,6 @@ public class TomorrowFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tomorrow, container, false);
-        //TableLayout stk = (TableLayout) view.findViewById(R.id.table_today);
-
-        //User user = new User("sam","kal","email","8978675645","pwd","cpwd");
         Calendar calendar = Calendar.getInstance();
         int day = calendar.get(Calendar.DAY_OF_WEEK)+1;
         Log.e("Today",day+"");

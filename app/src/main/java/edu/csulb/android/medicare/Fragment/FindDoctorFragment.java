@@ -45,7 +45,9 @@ import edu.csulb.android.medicare.Model.Doctor;
 import edu.csulb.android.medicare.Model.Pharmacy;
 import edu.csulb.android.medicare.R;
 
-
+/*
+* Description: Fragment to find doctors using better doctor API
+* */
 public class FindDoctorFragment extends Fragment {
     ProgressBar progressBar;
     private View mProgressView;
@@ -137,7 +139,6 @@ public class FindDoctorFragment extends Fragment {
                             String title = jsonObject.getJSONObject("profile").getString("title");
                             String speciality = jsonObject.getJSONArray("specialties").getJSONObject(0).getString("name");
                             String street = jsonObject.getJSONArray("practices").getJSONObject(0).getJSONObject("visit_address").getString("street");
-                            //String street2 = jsonObject.getJSONArray("practices").getJSONObject(0).getJSONObject("visit_address").getString("street2");
                             String city = jsonObject.getJSONArray("practices").getJSONObject(0).getJSONObject("visit_address").getString("city");
                             String state  = jsonObject.getJSONArray("practices").getJSONObject(0).getJSONObject("visit_address").getString("state");
                             String zip = jsonObject.getJSONArray("practices").getJSONObject(0).getJSONObject("visit_address").getString("zip");
@@ -171,7 +172,5 @@ public class FindDoctorFragment extends Fragment {
                 }
             return isSuccessful;
         }
-
-
     }
 }

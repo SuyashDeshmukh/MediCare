@@ -23,7 +23,10 @@ import edu.csulb.android.medicare.Model.Medication;
 import edu.csulb.android.medicare.Model.Reminder;
 import edu.csulb.android.medicare.R;
 import edu.csulb.android.medicare.Utility.MedicineCompare;
-
+/*
+* Description: Fragment to view all medications
+*  Resource: Github
+* */
 public class ViewAllMedicationsFragment extends Fragment {
     ExpandableViewAdapter listAdapter;
     ExpandableListView expListView;
@@ -50,18 +53,14 @@ public class ViewAllMedicationsFragment extends Fragment {
         expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
             public void onGroupExpand(int groupPosition) {
-                /*Toast.makeText(getApplicationContext(),
-                        listDataHeader.get(groupPosition) + " Expanded",
-                        Toast.LENGTH_SHORT).show();*/
+                /*Expand*/
             }
         });
 
         expListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
             @Override
             public void onGroupCollapse(int groupPosition) {
-                /*Toast.makeText(getContext(),
-                        listDataHeader.get(groupPosition) + " Collapsed",
-                        Toast.LENGTH_SHORT).show();*/
+                /*Collpase*/
             }
         });
 
@@ -73,9 +72,6 @@ public class ViewAllMedicationsFragment extends Fragment {
                 PillBox pillBox = new PillBox();
                 pillBox.setTempIds(alarmIDData.get(groupPosition).get(childPosition));
 
-                /*Intent intent = new Intent(getContext(), EditActivity.class);
-                startActivity(intent);
-                finish();*/
                 return false;
             }
         });

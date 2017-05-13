@@ -10,7 +10,9 @@ import android.support.v4.app.DialogFragment;
 import edu.csulb.android.medicare.Activity.AddMedicationWithBarcodeActivity;
 import edu.csulb.android.medicare.Activity.AddMedicationWithManualActivity;
 import edu.csulb.android.medicare.R;
-
+/*
+* Description: Fragment to alert medication method
+* */
 public class AlertDialogAddMedicationFragment extends DialogFragment {
     final int BARCODE=0;
     final int MANUAL=1;

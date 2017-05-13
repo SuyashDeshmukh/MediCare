@@ -5,10 +5,9 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 
 import edu.csulb.android.medicare.R;
-
-/**
- * Created by Suyash on 06-Apr-17.
- */
+/*
+* Description: user base class for displaying progress disalog
+* */
 
 public class BaseActivity extends AppCompatActivity {
 
