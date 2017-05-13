@@ -2,10 +2,11 @@
 <b>MediCare : Medicine Reminder Application</b><br/><br/>
 *Contributors :<br/>*
 Suyash Deshmukh <br/>
-Samruddhi Kalyankar<br/><br/>
+Samruddhi Kalyankar<br/>
 # Demo video
 <a href="https://www.youtube.com/watch?v=uHft8zs6RWs&t=12s"> MediCare : Outpatient Medicine Management </a>
 <br/>
+# Description
 *<b>Scope</b><br/>*
 MediCare is a medicine reminder application with multiple additional features like automated medicine detection with barcode scanning, find nearby pharmacies and locate medical professional with specific criterias. The system consists of a barcode scanner to scan the prescribed medicine information to acquire the details and dosages. For this feature, we depend on the web service architecture to acquire medication details. Secondly, the system will set up reminders for the prescribed medication as per the dosage. These reminders can be notified to the user through various display, sound and vibration techniques. These reminders will also be added as the calendar event. 
 Additionally, an emergency contact is set up to send text or email alert in case of any emergency situations.
